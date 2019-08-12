@@ -17,9 +17,8 @@ void	setall(t_mlx *mlx)
 	int	i;
 
 	i = -1;
-	freeimage(&mlx->img->ptr);
+//	freeimage(&mlx->img->ptr);
 	mlx_clear_window(mlx->mlx, mlx->win);
-	
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->image, 0, 0);
 }
 
