@@ -1,5 +1,9 @@
 #include <wolf3d.h>
 
+//1-Leer mapas Y dibujarlos en 2D
+//2-Ray casting
+//3-Render ray casting
+
 void set_multythread(t_m *m)
 {
 	m->y = 0;
