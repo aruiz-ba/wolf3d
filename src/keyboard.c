@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 14:12:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/07/15 17:44:09 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/08/12 17:15:24 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	setall(t_mlx *mlx)
 	int	i;
 
 	i = -1;
-//	freeimage(&mlx->img->ptr);
+	freeimage(&mlx->img->ptr);
 	mlx_clear_window(mlx->mlx, mlx->win);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->image, 0, 0);
 }

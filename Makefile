@@ -6,13 +6,13 @@
 #    By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/28 12:02:51 by aruiz-ba          #+#    #+#              #
-#    Updated: 2019/07/03 16:19:00 by aruiz-ba         ###   ########.fr        #
+#    Updated: 2019/08/12 17:52:50 by aruiz-ba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wolf3d
 
-SRC	= $(addprefix src/, main.c image.c keyboard.c)
+SRC	= $(addprefix src/, main.c image.c keyboard.c put_line.c)
 
 OBJ = $(SRC:.c=.o)
 
