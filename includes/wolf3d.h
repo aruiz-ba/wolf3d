@@ -3,8 +3,8 @@
 # include "mlx.h"
 # include "math.h"
 # include "pthread.h"
-# define WIN_WIDTH	700
-# define WIN_HEIGHT	700
+# define WIN_WIDTH	800
+# define WIN_HEIGHT	800
 # define LEFT		123
 # define RIGHT		124
 # define ESC		53
@@ -22,6 +22,7 @@ typedef struct		s_image
 typedef struct		s_map
 {
 	unsigned int	grid[WIN_WIDTH][WIN_HEIGHT];
+	unsigned int	wallbrd[3][3];
 }					t_map;
 
 typedef struct		s_mlx
@@ -73,3 +74,4 @@ void	freeimage(char **image_string);
 void	fill_image(t_m	*m);
 void	set_multythread(t_m *m);
 int		put_line(t_point *a, t_point *b, t_map *map);
+void	read_file(t_m *m);

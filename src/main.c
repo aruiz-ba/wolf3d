@@ -4,7 +4,7 @@
 //2-Ray casting
 //3-Render ray casting
 
-void set_multythread(t_m *m)
+void	set_multythread(t_m *m)
 {
 	m->y = 0;
 	m->x = 0;
@@ -12,11 +12,43 @@ void set_multythread(t_m *m)
 	m->end_k = (WIN_HEIGHT * WIN_WIDTH) * 4;
 }
 
-int	main()
+void	set_board(t_m *m)
 {
-	t_m	*m;
+	int y;
+	int x;
 	t_point a;
 	t_point b;
+
+	y = 50;
+	x = 50;
+	while(y < WIN_WIDTH - 100)
+	{
+		a.x = x;
+		a.y = y;
+		b.x = WIN_WIDTH - 150;
+		ft_putnbr(b.x);
+		ft_putchar('\n');
+		b.y = y;
+		y += 200;
+		put_line(&a, &b, &m->map);
+	}
+	y = WIN_WIDTH;
+	put_line(&a, &b, &m->map);
+	y = 50;
+	while(x < WIN_HEIGHT - 100)
+	{
+		a.x = x;
+		a.y = y;
+		b.x = x;
+		b.y = WIN_HEIGHT - 150;
+		x += 200;
+		put_line(&a, &b, &m->map);
+	}
+}
+
+int		main()
+{
+	t_m	*m;
 
 	m = NULL;
 	if (!(m = (t_m*)malloc(sizeof(t_m))))
@@ -26,11 +58,8 @@ int	main()
 	m->mlx.win = mlx_new_window(m->mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "fract");
 	new_image(m);
 	set_multythread(m);
-	a.x = 0;
-	a.y = 0;
-	b.x = 100;
-	b.y = 300;
-	put_line(&a, &b, &m->map);
+	//read_file(m);
+	set_board(m);
 	fill_image(m);
 	mlx_put_image_to_window(m->mlx.mlx, m->mlx.win, m->img.image, 0, 0);
 	//setall(&m->mlx);
