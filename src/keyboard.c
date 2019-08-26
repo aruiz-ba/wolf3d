@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 14:12:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/08/12 17:15:24 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/08/22 14:47:09 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ int		deal_key(int key, t_mlx *mlx)
 	if (key == LEFT)
 	//	mlx->x -= 50;
 	if (key == RIGHT)
-	//	mlx->x += 50;
+		setall(mlx);
 	if (key == ESC)
 		exit(0);
-	if(key == LEFT)
-		setall(mlx);
 	return (1);
 }

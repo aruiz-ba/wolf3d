@@ -26,8 +26,6 @@ void	set_board(t_m *m)
 		a.x = x;
 		a.y = y;
 		b.x = WIN_WIDTH - 150;
-		ft_putnbr(b.x);
-		ft_putchar('\n');
 		b.y = y;
 		y += 200;
 		put_line(&a, &b, &m->map);
@@ -63,6 +61,7 @@ int		main()
 	fill_image(m);
 	mlx_put_image_to_window(m->mlx.mlx, m->mlx.win, m->img.image, 0, 0);
 	//setall(&m->mlx);
+	raycast();
 	mlx_hook(m->mlx.win, 2, 1L << 2, deal_key, &m->mlx);
 	mlx_loop(m->mlx.mlx);
 }
