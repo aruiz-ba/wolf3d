@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:02:24 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/08/13 17:10:46 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/08/26 16:45:47 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	fill_image(t_m	*m)
 	y = m->y;
 	x = m->x;
 	bright = 0xFF0000;
-	while (m->y < (WIN_WIDTH + y) && m->min_k <= m->end_k)
+	while (m->y < (WIN_HEIGHT + y))
 	{
 		m->x = x;
-		while (m->x < (WIN_HEIGHT + x) && m->min_k <= m->end_k)
+		while (m->x < (WIN_WIDTH + x))
 		{
 			m->n = 0;
 			(m->img.ptr)[m->min_k + 0] = m->map.grid[m->x][m->y] % 256 % 256;

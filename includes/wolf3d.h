@@ -4,8 +4,8 @@
 # include "math.h"
 # include "pthread.h"
 # include "stdio.h" //BORRAME
-# define WIN_WIDTH	800
-# define WIN_HEIGHT	800
+# define WIN_WIDTH	640
+# define WIN_HEIGHT	400
 # define LEFT		123
 # define RIGHT		124
 # define ESC		53
@@ -35,18 +35,6 @@ typedef struct		s_mlx
 	t_image			*img;
 }					t_mlx;
 
-typedef struct		s_m
-{
-	t_mlx			mlx;
-	t_image			img;
-	t_map			map;
-	int				x;
-	int				y;
-	int				min_k;
-	int				end_k;
-	int				n;
-}					t_m;
-
 typedef struct		s_line
 {
 	int				dy;
@@ -68,6 +56,24 @@ typedef struct		s_point
 	int				y;
 }					t_point;
 
+typedef struct		s_rycst
+{
+	int				proywall;
+	int				realwall;
+	int				proyPdist;
+	int				realPdist;
+}					t_rycst;
+
+typedef struct		s_m
+{
+	t_mlx			mlx;
+	t_image			img;
+	t_map			map;
+	int				x;
+	int				y;
+	int				min_k;
+	int				n;
+}					t_m;
 int	deal_key(int key, t_mlx *mlx);
 void	setall(t_mlx *mlx);
 void	new_image(t_m *m);
@@ -76,4 +82,4 @@ void	fill_image(t_m	*m);
 void	set_multythread(t_m *m);
 int		put_line(t_point *a, t_point *b, t_map *map);
 void	read_file(t_m *m);
-void	raycast();
+int		raycast(double	angle);
