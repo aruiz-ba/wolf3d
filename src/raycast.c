@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/08/27 19:37:47 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:53:51 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		wall_height(int		dist_wall)
 {
-	//printf("dist_wall:%i\n", dist_wall);
+	printf("dist_wall:%i\n", 64/dist_wall);
 	return(((double)64/(double)dist_wall) * 277);
 }
 
@@ -31,10 +31,10 @@ int		raycast(double	angle)
 	t_point	A;
 	t_point	P;
 	t_point	tm;
-	int		Xa;
-	int		Ya;
-	int		distv;
-	int		disth;
+	int				Xa;
+	int				Ya;
+	int				distv;
+	int				disth;
 
 	P.y = 224;
 	P.x	= 96;
@@ -56,7 +56,6 @@ int		raycast(double	angle)
 			tm.y += Ya;
 		}
 		disth = abs(P.x - tm.x) / cos(angle);
-		printf("DISTH:(%i)\n", disth);
 		printf("GridCoordinateHorizon:(%d,%i)\n", tm.x/64, tm.y/64);
 	}
 	else
@@ -72,18 +71,16 @@ int		raycast(double	angle)
 	{
 		A.x = (P.x/64) * (64) - 1;
 		A.y = P.y + (P.x - A.x) * tan(angle);
-		Ya = 64 * tan(angle);//if ray its going up;
+			Ya = 64 * tan(angle);//if ray its going up;
 		Xa = -64;
 	}
 	else
 	{
 		A.x = (P.x/64) * (64) + 64; 
-		A.y = P.y + (P.x - A.x) * tan(angle);
-		Ya = -64 * tan(angle);//if ray its going up;
 		Xa = 64;
 	//	printf("Me estoy corriendo");
 	}
-	//printf("GridCoordinate:(%i,%i)\n", A.x/64, A.y/64);
+	//printf("GridCoordinateVertic:(%i,%i)\n", A.x/64, A.y/64);
 	if(worldmap[A.x/64][A.y/64] == 0)
 	{
 		tm.x = A.x;
@@ -94,18 +91,25 @@ int		raycast(double	angle)
 			tm.y += Ya;
 		}
 		distv = abs(P.x - tm.x) / cos(angle);
-		//printf("GridCoordinateVerti:(%d,%i)\n", tm.x/64, tm.y/64);
+		printf("GridCoordinateVertitm:(%d,%i)\n", tm.x/64, tm.y/64);
 	}
 	else
 	{
 		distv = abs(P.x - A.x) / cos(angle); 
-		//printf("GridCoordinateVerti:(%d,%i)\n", A.x/64, A.y/64);
+		printf("GridCoordinateVerti:(%d,%i)\n", A.x/64, A.y/64);
 	}
-	//printf("Distance:(%i,%i)\n", distv, disth);
+	printf("Distance:(v:%i,h:%i)\n", distv, disth);
 	if(distv < disth)
+	{
+		printf("DISTV:(%i)\n", distv);
 		return(wall_height(distv * cos(angle))); //Size corrected to avoid fisheye
+	}
 	else
+	{
+		printf("DISTH:(%i)\n", disth);
+		printf("cosangle:(%f)\n", cos(angle));
 		return(wall_height(disth * cos(angle)));
+	}
 }
 //WORKS BUT NOW YOU NEED TO MAKE IT WORK WITH RAYS GROWING POSITIVE AND NEGATIVE AND IF RAYS
 //GO LEFT OR RIGHT

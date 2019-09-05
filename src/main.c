@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/08/27 19:37:48 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:53:53 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,16 @@ void	set_board(t_m *m)
 	}
 }
 
-int		main()
+int		main(/*int argc, char **argv*/)
 {
 	t_m	*m;
 
 	m = NULL;
+	/*if(argc != 2)
+	{
+		ft_putstr("not good input\n");
+		return(0);
+	}*/		
 	if (!(m = (t_m*)malloc(sizeof(t_m))))
 		return (-1);
 	ft_bzero(m, sizeof(m));
@@ -70,7 +75,7 @@ int		main()
 	set_multythread(m);
 	//read_file(m);
 	set_board(m);
-	//raycast(60);
+	//printf("OUTPUT:%i",raycast(atoi(argv[1])));
 	fill_image(m);
 	mlx_put_image_to_window(m->mlx.mlx, m->mlx.win, m->img.image, 0, 0);
 	//setall(&m->mlx);
