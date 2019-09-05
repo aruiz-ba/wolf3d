@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/05 14:53:53 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/05 14:59:02 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	set_board(t_m *m)
 		b.y = (WIN_HEIGHT/2) + (out/2);
 		//printf("b.y:%i\n\n", b.y);
 		//printf("Point A:i(%i,%i) Point B:(%i,%i)\n", a.x, a.y, b.x, b.y);
-	//	put_line(&a, &b, &m->map);
+		//put_line(&a, &b, &m->map);
 		x++;
 		xinv--;
 	}
