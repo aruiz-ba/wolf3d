@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard.c                                         :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 14:12:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/05 17:41:33 by aruiz-ba         ###   ########.fr       */
+/*   Created: 2019/09/06 11:36:47 by aruiz-ba          #+#    #+#             */
+/*   Updated: 2019/09/06 15:33:14 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <wolf3d.h>
-
-void	setall(t_mlx *mlx)
+double	map1(double a, double a1, double b0, double b1)
 {
-	freeimage(&mlx->img->ptr);
-	mlx_clear_window(mlx->mlx, mlx->win);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->image, 0, 0);
-}
+	int		a0;
 
-int		deal_key(int key, t_mlx *mlx)
-{
-	if (key == LEFT)
-	//	mlx->x -= 50;
-	if (key == RIGHT)
-	{
-		setall(mlx);
-	}
-	if (key == ESC)
-		exit(0);
-	return (1);
+	a0 = 90;
+	return (b0 + (b1 - b0) * ((a - a0) / (a1 - a0)));
 }

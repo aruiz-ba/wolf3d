@@ -83,3 +83,5 @@ void	set_multythread(t_m *m);
 int		put_line(t_point *a, t_point *b, t_map *map);
 void	read_file(t_m *m);
 int		raycast(double	angle);
+double	map1(double a, double a1, double b0, double b1);
+
