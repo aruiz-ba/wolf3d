@@ -36,7 +36,7 @@ void	sub_put_line(t_line *ln, t_point *a, t_point *b, t_map *map)
 	{
 		if ((ln->xy[0] >= 0 && ln->xy[0] <= WIN_WIDTH) &&
 		(ln->xy[1] >= 0 && ln->xy[1] <= WIN_HEIGHT))
-			map->grid[ln->xy[0]][ln->xy[1]] = WALL_COLOR;
+			map->grid[ln->xy[0]][ln->xy[1]] = map->color;
 		if (ln->av >= 0)
 		{
 			ln->xy[0] = (ln->xy[0] + ln->inxi);

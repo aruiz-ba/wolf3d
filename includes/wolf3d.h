@@ -3,13 +3,29 @@
 # include "mlx.h"
 # include "math.h"
 # include "pthread.h"
+# include "fcntl.h"
 # include "stdio.h" //BORRAME
-# define WIN_WIDTH	640
-# define WIN_HEIGHT	400
-# define LEFT		123
-# define RIGHT		124
+# define WIN_WIDTH	1080//640
+# define WIN_HEIGHT	720//400
+# define P_SPEED	0.5
+# define W			13
+# define S			1
+# define A			0
+# define D			2
 # define ESC		53
-# define WALL_COLOR	0xFF0000
+# define RGB_Red	0xFF0000
+# define RGB_Green	0x00FF00
+# define RGB_Blue	0x0000FF
+# define RGB_White	0xFFFFFF
+# define RGB_Yellow	0xFFFF00
+
+typedef struct		s_parse
+{
+	int				fd;
+	int				wrds;
+	char			*buff;
+	int				ret;
+}					t_parse;
 
 typedef struct		s_image
 {
@@ -23,17 +39,8 @@ typedef struct		s_image
 typedef struct		s_map
 {
 	unsigned int	grid[WIN_WIDTH][WIN_HEIGHT];
-	unsigned int	wallbrd[3][3];
+	int				color;
 }					t_map;
-
-typedef struct		s_mlx
-{
-	void			*mlx;
-	void			*win;
-	double			a;
-	double			b;
-	t_image			*img;
-}					t_mlx;
 
 typedef struct		s_line
 {
@@ -52,36 +59,46 @@ typedef struct		s_line
 
 typedef struct		s_point
 {
-	int				x;
-	int				y;
+	double			x;
+	double			y;
 }					t_point;
 
 typedef struct		s_rycst
 {
-	int				proywall;
-	int				realwall;
-	int				proyPdist;
-	int				realPdist;
+	double			posX;
+	double			posY;
+	double			dirX;
+	double			dirY;
+	double			planeX;
+	double			planeY;
 }					t_rycst;
 
-typedef struct		s_m
+typedef struct		s_mlx
 {
-	t_mlx			mlx;
-	t_image			img;
-	t_map			map;
+	void			*mlx;
+	void			*win;
+	double			a;
+	double			b;
 	int				x;
 	int				y;
 	int				min_k;
 	int				n;
-}					t_m;
+	double			rot;
+	double			posX;
+	double			posY;
+	t_image			img;
+	t_map			map;
+	t_rycst			ry;
+}					t_mlx;
 int	deal_key(int key, t_mlx *mlx);
 void	setall(t_mlx *mlx);
-void	new_image(t_m *m);
+void	new_image(t_mlx *mlx);
 void	freeimage(char **image_string);
-void	fill_image(t_m	*m);
-void	set_multythread(t_m *m);
+void	fill_image(t_mlx	*mlx);
+void	set_multythread(t_mlx *mlx);
 int		put_line(t_point *a, t_point *b, t_map *map);
-void	read_file(t_m *m);
-int		raycast(double	angle);
+void	raycast(t_mlx	*mlx);
 double	map1(double a, double a1, double b0, double b1);
-
+void	freegrid(t_map *map);
+t_list	*reverse(t_list *head);
+t_list	*ft_parse_file(char *root, int *ln, int *dt);

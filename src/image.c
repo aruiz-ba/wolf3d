@@ -6,11 +6,31 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:02:24 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/06 13:05:23 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/11 14:26:31 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf3d.h>
+
+void	freegrid(t_map *map)
+{
+	int		i;
+	int		j;
+	int		k;
+
+	k = 0;
+	i = 0;
+	while (i < WIN_HEIGHT)
+	{
+		j = 0;
+		while (j < WIN_WIDTH)
+		{
+			map->grid[j][i] = 0x00000;
+			j++;
+		}
+		i++;
+	}
+}
 
 void	freeimage(char **image_string)
 {
@@ -32,35 +52,35 @@ void	freeimage(char **image_string)
 	}
 }
 
-void	fill_image(t_m	*m)
+void	fill_image(t_mlx	*mlx)
 {
 	int		bright;
 	int		x;
 	int		y;
 
-	y = m->y;
-	x = m->x;
+	y = mlx->y;
+	x = mlx->x;
 	bright = 0xFF0000;
-	while (m->y < (WIN_HEIGHT + y))
+	while (mlx->y < (WIN_HEIGHT + y))
 	{
-		m->x = x;
-		while (m->x < (WIN_WIDTH + x))
+		mlx->x = x;
+		while (mlx->x < (WIN_WIDTH + x))
 		{
-			m->n = 0;
-			(m->img.ptr)[m->min_k + 0] = m->map.grid[m->x][m->y] % 256 % 256;
-			(m->img.ptr)[m->min_k + 1] = m->map.grid[m->x][m->y] / 256 % 256;
-			(m->img.ptr)[m->min_k + 2] = m->map.grid[m->x][m->y] / 256 / 256;
-			(m->img.ptr)[m->min_k + 3] = 0;
-			m->min_k += 4;
-			m->x++;
+			mlx->n = 0;
+			(mlx->img.ptr)[mlx->min_k + 0] = mlx->map.grid[mlx->x][mlx->y] % 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 1] = mlx->map.grid[mlx->x][mlx->y] / 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 2] = mlx->map.grid[mlx->x][mlx->y] / 256 / 256;
+			(mlx->img.ptr)[mlx->min_k + 3] = 0;
+			mlx->min_k += 4;
+			mlx->x++;
 		}
-		m->y++;
+		mlx->y++;
 	}
 }
 
-void	new_image(t_m *m)
+void	new_image(t_mlx *mlx)
 {
-	m->img.image = mlx_new_image(m->mlx.mlx, WIN_WIDTH, WIN_HEIGHT);
-	m->img.ptr = mlx_get_data_addr(m->img.image, &m->img.bpp, &m->img.stride,
-	&m->img.endian);
+	mlx->img.image = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+	mlx->img.ptr = mlx_get_data_addr(mlx->img.image, &mlx->img.bpp, &mlx->img.stride,
+	&mlx->img.endian);
 }

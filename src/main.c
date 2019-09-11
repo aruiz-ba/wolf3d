@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/06 16:45:18 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/11 17:07:46 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,65 +16,33 @@
 //2-Ray casting
 //3-Render ray casting
 
-void	set_multythread(t_m *m)
-{
-	m->y = 0;
-	m->x = 0;
-	m->min_k = 0;
-}
-
-void	set_board(t_m *m)
-{
-	int x;
-	int	out;
-	double	angind;
-	int	i;
-	t_point a;
-	t_point b;
-
-	i = 1;
-	angind = (((double)60/(double)WIN_WIDTH));
-	x = 0;
-	while(x < WIN_WIDTH)
-	{
-		printf("angle:%f\n", ((angind * x) + 60));
-		out = raycast((angind * x) + 60);
-		printf("out:%i\n", out);
-		a.x = x;
-		a.y = (WIN_HEIGHT/2) - (out/2);
-		b.x = x;
-		b.y = (WIN_HEIGHT/2) + (out/2);
-		//printf("b.y:%i\n\n", b.y);
-		//printf("Point A:i(%i,%i) Point B:(%i,%i)\n", a.x, a.y, b.x, b.y);
-		put_line(&a, &b, &m->map);
-		x++;
-	}
-}
-
 int		main(int argc, char **argv)
 {
-	t_m	*m;
-
-	m = NULL;
+	t_mlx mlx;
+//	t_xvar *xvar;
+	t_list *map;
+//	char	**xpm;
+	int		ln;
+	int		dt;
+	
 	if(argc != 2)
-	{
-		ft_putstr("not good input\n");
 		return(0);
-	}
-	if (!(m = (t_m*)malloc(sizeof(t_m))))
-		return (-1);
-	ft_bzero(m, sizeof(m));
-	m->mlx.mlx = mlx_init();
-	m->mlx.win = mlx_new_window(m->mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "fract");
-	new_image(m);
-	set_multythread(m);
-	//read_file(m);
-	set_board(m); //CREO QUE EL PROBLEMA RESIDE EN EL SENO Y COSENO
-	raycast(atoi(argv[1]));
-	//printf("OUTPUT:%i",raycast(atoi(argv[1])));
-	fill_image(m);
-	mlx_put_image_to_window(m->mlx.mlx, m->mlx.win, m->img.image, 0, 0);
-//	setall(&m->mlx);
-	mlx_hook(m->mlx.win, 2, 1L << 2, deal_key, &m->mlx);
-	mlx_loop(m->mlx.mlx);
+	if((map = ft_parse_file(argv[1], &ln, &dt)) == NULL)
+		return(0);
+
+	printf("Parsed:%s\n", map->content);
+	mlx.y = 0;
+	mlx.x = 0;
+	mlx.min_k = 0;
+	mlx.rot = 0;
+	mlx.posX = 12;
+	mlx.posY = 13;
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "fract");
+	new_image(&mlx);
+	//mlx_xpm_to_image(*xvar,  );
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.image, 0, 0);
+	setall(&mlx);
+	mlx_hook(mlx.win, 2, 1L << 2, deal_key, &mlx);
+	mlx_loop(mlx.mlx);
 }
