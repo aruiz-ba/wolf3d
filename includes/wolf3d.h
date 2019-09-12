@@ -71,6 +71,7 @@ typedef struct		s_rycst
 	double			dirY;
 	double			planeX;
 	double			planeY;
+	int				**worldMap;
 }					t_rycst;
 
 typedef struct		s_mlx
@@ -102,3 +103,4 @@ double	map1(double a, double a1, double b0, double b1);
 void	freegrid(t_map *map);
 t_list	*reverse(t_list *head);
 t_list	*ft_parse_file(char *root, int *ln, int *dt);
+int		**set_board(t_list *ls);
