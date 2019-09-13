@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/12 19:33:21 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/13 20:32:16 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,9 @@ int		main(int argc, char **argv)
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "fract");
 	new_image(&mlx);
-/*	
-	int	a;
-	int b;
-
-	a = 64;
-	b = 64;
-	mlx.img.image = mlx_xpm_file_to_image(mlx.mlx, "text/wood.xpm", &a, &b);
-	mlx.img.ptr = mlx_get_data_addr(mlx.img.image, &mlx.img.bpp, &mlx.img.stride, &mlx.img.endian);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.image, 0, 0);
-*/
-	//mlx.ry.worldMap = set_board(map);	
+	//mlx.ry.worldMap = set_board(map);	//CRASHEA POR ALGUN MOTIVO
+	load_textures(&mlx);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.tex.image, 0, 0);
 	setall(&mlx);
 	mlx_hook(mlx.win, 2, 1L << 2, deal_key, &mlx);
 	mlx_loop(mlx.mlx);

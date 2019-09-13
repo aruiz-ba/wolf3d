@@ -7,7 +7,9 @@
 # include "stdio.h" //BORRAME
 # define WIN_WIDTH	1080//640
 # define WIN_HEIGHT	720//400
-# define P_SPEED	0.5
+# define texWidth 	64
+# define texHeight	64
+# define P_SPEED	0.05
 # define W			13
 # define S			1
 # define A			0
@@ -88,6 +90,7 @@ typedef struct		s_mlx
 	double			posX;
 	double			posY;
 	t_image			img;
+	t_image			tex;
 	t_map			map;
 	t_rycst			ry;
 }					t_mlx;
@@ -104,3 +107,4 @@ void	freegrid(t_map *map);
 t_list	*reverse(t_list *head);
 t_list	*ft_parse_file(char *root, int *ln, int *dt);
 int		**set_board(t_list *ls);
+void	load_textures(t_mlx	*mlx);

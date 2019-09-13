@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/12 19:00:17 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/13 20:32:17 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,19 @@ void	raycast_loop(t_mlx *mlx)
 		set_color(worldMap[mapX][mapY], &mlx->map);
 		if(side == 1)
 			mlx->map.color /= 2;
+/*		textnum = worldMap[mapX][mapY] - 1;
+		double wallX;	//where exacly wall was hit
+
+		if(side == 0)
+			wallX = posY + perpWallDist * rayDirY;
+		else
+			wallX = posX + perpWallDist * rayDirX;
+		wallX -= (int)wallX;
+		//xcordinate on the texture
+		if(side == 0 && rayDirX > 0)
+			texX = texWidth - texX - 1;
+		if(side == 1 && rayDirY < 0)
+			texX = texWidth - texX -1;*/
 		put_line(&a, &b, &mlx->map);
 	}
 }
