@@ -85,12 +85,12 @@ typedef struct		s_mlx
 	int				x;
 	int				y;
 	int				min_k;
-	int				n;
 	double			rot;
 	double			posX;
 	double			posY;
 	t_image			img;
 	t_image			tex;
+	int				pix[64][64];
 	t_map			map;
 	t_rycst			ry;
 }					t_mlx;

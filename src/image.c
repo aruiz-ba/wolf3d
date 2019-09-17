@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:02:24 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/11 14:26:31 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/17 15:19:18 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,16 @@ void	freeimage(char **image_string)
 
 void	fill_image(t_mlx	*mlx)
 {
-	int		bright;
 	int		x;
 	int		y;
 
 	y = mlx->y;
 	x = mlx->x;
-	bright = 0xFF0000;
 	while (mlx->y < (WIN_HEIGHT + y))
 	{
 		mlx->x = x;
 		while (mlx->x < (WIN_WIDTH + x))
 		{
-			mlx->n = 0;
 			(mlx->img.ptr)[mlx->min_k + 0] = mlx->map.grid[mlx->x][mlx->y] % 256 % 256;
 			(mlx->img.ptr)[mlx->min_k + 1] = mlx->map.grid[mlx->x][mlx->y] / 256 % 256;
 			(mlx->img.ptr)[mlx->min_k + 2] = mlx->map.grid[mlx->x][mlx->y] / 256 / 256;
