@@ -90,7 +90,7 @@ typedef struct		s_mlx
 	double			posY;
 	t_image			img;
 	t_image			tex;
-	int				pix[64][64];
+	int				pix[64][0];
 	t_map			map;
 	t_rycst			ry;
 }					t_mlx;
@@ -108,3 +108,5 @@ t_list	*reverse(t_list *head);
 t_list	*ft_parse_file(char *root, int *ln, int *dt);
 int		**set_board(t_list *ls);
 void	load_textures(t_mlx	*mlx);
+void	text_to_pixel(t_mlx *mlx);
+void	fill_image_texture(t_mlx	*mlx);

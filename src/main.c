@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/17 19:19:07 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/18 17:07:57 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ int		main(int argc, char **argv)
 	new_image(&mlx);
 	//mlx.ry.worldMap = set_board(map);	//CRASHEA POR ALGUN MOTIVO
 	load_textures(&mlx);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.tex.image, 0, 0);
 	//setall(&mlx);
+	text_to_pixel(&mlx);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.tex.image, 0, 0);
 	mlx_hook(mlx.win, 2, 1L << 2, deal_key, &mlx);
 	mlx_loop(mlx.mlx);
 }
