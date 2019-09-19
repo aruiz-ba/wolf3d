@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 17:11:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/18 17:08:04 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/19 14:51:17 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,33 @@ void	fill_image_texture(t_mlx	*mlx)
 {
 	int		x;
 	int		y;
+	int		tex_k;
+	int		tmtex_k;
 
 	y = 0;
 	x = 0;
 	mlx->min_k = 0;
-	while (y < 64)
+	tex_k = 0;
+	tmtex_k = 0;
+	while (y < 64*8)
 	{
 		x = 0;
-		while (x < 64)
+		while (x < 64*8)
 		{
-			(mlx->img.ptr)[mlx->min_k + 0] = mlx->pix[x][y] % 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 1] = mlx->pix[x][y] / 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 2] = mlx->pix[x][y] / 256 / 256;
+			(mlx->img.ptr)[mlx->min_k + 0] = mlx->tex.ptr[tex_k + 0];//mlx->pix[x][y] % 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 1] = mlx->tex.ptr[tex_k + 1];//mlx->pix[x][y] / 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 2] = mlx->tex.ptr[tex_k + 2];//mlx->pix[x][y] / 256 / 256;
 			(mlx->img.ptr)[mlx->min_k + 3] = 0;
 			mlx->min_k += 4;
-			//printf("color:%X\n", mlx->pix[x][y]);
+			if(x%8 == 0)
+				tex_k += 4;
 			x++;
 		}
-		mlx->min_k += (WIN_WIDTH * 4) - (64*4);
+		if(y%8 == 0)
+			tmtex_k = tex_k;
+		else
+			tex_k = tmtex_k;
+		mlx->min_k += (WIN_WIDTH * 4) - (64*4)*8;
 		y++;
 	}
 }
