@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 17:11:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/19 14:51:17 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/23 19:23:55 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	text_to_pixel(t_mlx *mlx)
 {
-	int		x;
-	int		y;
-	int		pixval;
+	int				x;
+	int				y;
+	int				pixval;
 
 	y = 0;
 	x = 0;
@@ -27,8 +27,9 @@ void	text_to_pixel(t_mlx *mlx)
 		x = 0;
 		while (x < 64)
 		{
-			pixval = (mlx->tex.ptr)[mlx->min_k + 0]<<16 | (mlx->tex.ptr)[mlx->min_k + 1]<<8 | (mlx->tex.ptr)[mlx->min_k + 2];
-			mlx->pix[x][y] = pixval;
+		//	pixval = (mlx->tex.ptr)[mlx->min_k + 0]<<16 | (mlx->tex.ptr)[mlx->min_k + 1]<<8 | (mlx->tex.ptr)[mlx->min_k + 2];
+			pixval =  (((mlx->tex.ptr)[mlx->min_k + 3] & 0xff) << 24) + (((mlx->tex.ptr)[mlx->min_k + 2] & 0xff) << 16) + (((mlx->tex.ptr)[mlx->min_k + 1] & 0xff) << 8) + ((mlx->tex.ptr)[mlx->min_k + 0] & 0xff);
+			mlx->map.pix[x][y] = pixval;
 			mlx->min_k += 4;
 			x++;
 			//printf("color:%X\n", mlx->pix[x][y]);
@@ -41,32 +42,38 @@ void	fill_image_texture(t_mlx	*mlx)
 {
 	int		x;
 	int		y;
-	int		tex_k;
-	int		tmtex_k;
+	int		tx_x;
+	int		tx_y;
+	int		tmtx_y;
 
 	y = 0;
 	x = 0;
 	mlx->min_k = 0;
-	tex_k = 0;
-	tmtex_k = 0;
+	tx_x = 0;
+	tx_y = 0;	
+	tmtx_y = 0;
 	while (y < 64*8)
 	{
 		x = 0;
+		tx_x = 0;
 		while (x < 64*8)
 		{
-			(mlx->img.ptr)[mlx->min_k + 0] = mlx->tex.ptr[tex_k + 0];//mlx->pix[x][y] % 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 1] = mlx->tex.ptr[tex_k + 1];//mlx->pix[x][y] / 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 2] = mlx->tex.ptr[tex_k + 2];//mlx->pix[x][y] / 256 / 256;
+			(mlx->img.ptr)[mlx->min_k + 0] = mlx->map.pix[tx_x][tx_y] % 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 1] = mlx->map.pix[tx_x][tx_y] / 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 2] = mlx->map.pix[tx_x][tx_y] / 256 / 256;
 			(mlx->img.ptr)[mlx->min_k + 3] = 0;
 			mlx->min_k += 4;
 			if(x%8 == 0)
-				tex_k += 4;
+				tx_x++;
 			x++;
 		}
 		if(y%8 == 0)
-			tmtex_k = tex_k;
+		{
+			tx_y++;
+			tmtx_y = tx_y;
+		}
 		else
-			tex_k = tmtex_k;
+			tx_y = tmtx_y;
 		mlx->min_k += (WIN_WIDTH * 4) - (64*4)*8;
 		y++;
 	}
