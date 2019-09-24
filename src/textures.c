@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 17:11:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/23 19:23:55 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/24 17:17:12 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	text_to_pixel(t_mlx *mlx)
 		{
 		//	pixval = (mlx->tex.ptr)[mlx->min_k + 0]<<16 | (mlx->tex.ptr)[mlx->min_k + 1]<<8 | (mlx->tex.ptr)[mlx->min_k + 2];
 			pixval =  (((mlx->tex.ptr)[mlx->min_k + 3] & 0xff) << 24) + (((mlx->tex.ptr)[mlx->min_k + 2] & 0xff) << 16) + (((mlx->tex.ptr)[mlx->min_k + 1] & 0xff) << 8) + ((mlx->tex.ptr)[mlx->min_k + 0] & 0xff);
-			mlx->map.pix[x][y] = pixval;
+			mlx->pix[x][y] = pixval;
 			mlx->min_k += 4;
 			x++;
 			//printf("color:%X\n", mlx->pix[x][y]);
@@ -58,9 +58,9 @@ void	fill_image_texture(t_mlx	*mlx)
 		tx_x = 0;
 		while (x < 64*8)
 		{
-			(mlx->img.ptr)[mlx->min_k + 0] = mlx->map.pix[tx_x][tx_y] % 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 1] = mlx->map.pix[tx_x][tx_y] / 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 2] = mlx->map.pix[tx_x][tx_y] / 256 / 256;
+			(mlx->img.ptr)[mlx->min_k + 0] = mlx->pix[tx_x][tx_y] % 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 1] = mlx->pix[tx_x][tx_y] / 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 2] = mlx->pix[tx_x][tx_y] / 256 / 256;
 			(mlx->img.ptr)[mlx->min_k + 3] = 0;
 			mlx->min_k += 4;
 			if(x%8 == 0)

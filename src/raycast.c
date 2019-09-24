@@ -6,13 +6,15 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/23 19:23:54 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/24 19:09:53 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf3d.h>
 #define	mapWidth 24
 #define mapHeight 24
+
+
 
 void	set_color(int	i, t_map *map)
 {
@@ -57,8 +59,6 @@ void	raycast_loop(t_mlx *mlx)
 		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
-	t_point a;
-	t_point b;
 	int		x;
 	double	sideDistX;
 	double	sideDistY;
@@ -135,27 +135,31 @@ void	raycast_loop(t_mlx *mlx)
 		int drawEnd = (lineHeight / 2) + (WIN_HEIGHT / 2);
 		if(drawEnd >= WIN_HEIGHT)
 			drawEnd = WIN_HEIGHT - 1;
-		a.x = x;
-		b.x = x;
-		a.y = drawStart;
-		b.y = drawEnd;
 		set_color(worldMap[mapX][mapY], &mlx->map);
 		if(side == 1)
 			mlx->map.color /= 2;
-/*		textnum = worldMap[mapX][mapY] - 1;
+
+
 		double wallX;	//where exacly wall was hit
 
 		if(side == 0)
-			wallX = posY + perpWallDist * rayDirY;
+			wallX = mlx->ry.posY + perpWallDist * rayDirY;
 		else
-			wallX = posX + perpWallDist * rayDirX;
+			wallX = mlx->ry.posX + perpWallDist * rayDirX;
 		wallX -= (int)wallX;
 		//xcordinate on the texture
+		int texX;
+
+		texX = (int)(wallX * (double)texWidth);
 		if(side == 0 && rayDirX > 0)
 			texX = texWidth - texX - 1;
 		if(side == 1 && rayDirY < 0)
-			texX = texWidth - texX -1;*/
-		put_line(&a, &b, &mlx->map);
+			texX = texWidth - texX -1;
+		mlx->ry.lineHeight = lineHeight;
+		mlx->ry.texX = texX;
+		mlx->ry.x = x;
+		mlx->ry.side = side;
+		put_line(drawStart, drawEnd, mlx);
 	}
 }
 

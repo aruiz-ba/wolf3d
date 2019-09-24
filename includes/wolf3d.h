@@ -20,6 +20,8 @@
 # define RGB_Blue	0x0000FF
 # define RGB_White	0xFFFFFF
 # define RGB_Yellow	0xFFFF00
+# define texWidth 64
+# define texHeight 64
 
 typedef struct		s_parse
 {
@@ -74,6 +76,10 @@ typedef struct		s_rycst
 	double			planeX;
 	double			planeY;
 	int				**worldMap;
+	int				lineHeight;
+	int				texX;
+	int				x;
+	int				side;
 }					t_rycst;
 
 typedef struct		s_mlx
@@ -100,7 +106,7 @@ void	new_image(t_mlx *mlx);
 void	freeimage(char **image_string);
 void	fill_image(t_mlx	*mlx);
 void	set_multythread(t_mlx *mlx);
-int		put_line(t_point *a, t_point *b, t_map *map);
+void	put_line(int start, int end, t_mlx *mlx);
 void	raycast(t_mlx	*mlx);
 double	map1(double a, double a1, double b0, double b1);
 void	freegrid(t_map *map);
@@ -110,3 +116,4 @@ int		**set_board(t_list *ls);
 void	load_textures(t_mlx	*mlx);
 void	text_to_pixel(t_mlx *mlx);
 void	fill_image_texture(t_mlx	*mlx);
+double	map2(double a,double a0 ,double a1, double b0, double b1);
