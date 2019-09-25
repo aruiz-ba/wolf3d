@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 17:11:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/24 17:17:12 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/25 20:03:40 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,14 @@ void	text_to_pixel(t_mlx *mlx)
 		x = 0;
 		while (x < 64)
 		{
-		//	pixval = (mlx->tex.ptr)[mlx->min_k + 0]<<16 | (mlx->tex.ptr)[mlx->min_k + 1]<<8 | (mlx->tex.ptr)[mlx->min_k + 2];
 			pixval =  (((mlx->tex.ptr)[mlx->min_k + 3] & 0xff) << 24) + (((mlx->tex.ptr)[mlx->min_k + 2] & 0xff) << 16) + (((mlx->tex.ptr)[mlx->min_k + 1] & 0xff) << 8) + ((mlx->tex.ptr)[mlx->min_k + 0] & 0xff);
 			mlx->pix[x][y] = pixval;
 			mlx->min_k += 4;
 			x++;
-			//printf("color:%X\n", mlx->pix[x][y]);
 		}
 		y++;
 	}
+	mlx->min_k = 0;
 }
 
 void	fill_image_texture(t_mlx	*mlx)

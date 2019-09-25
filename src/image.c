@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:02:24 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/23 16:25:00 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/25 14:32:58 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,21 @@ void	fill_image(t_mlx	*mlx)
 	int		x;
 	int		y;
 
-	y = mlx->y;
-	x = mlx->x;
-	while (mlx->y < (WIN_HEIGHT + y))
+	y = 0;
+	x = 0;
+	while (y < WIN_HEIGHT)
 	{
-		mlx->x = x;
-		while (mlx->x < (WIN_WIDTH + x))
+		x = 0;
+		while (x < WIN_WIDTH)
 		{
-			(mlx->img.ptr)[mlx->min_k + 0] = mlx->map.grid[mlx->x][mlx->y] % 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 1] = mlx->map.grid[mlx->x][mlx->y] / 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 2] = mlx->map.grid[mlx->x][mlx->y] / 256 / 256;
+			(mlx->img.ptr)[mlx->min_k + 0] = mlx->map.grid[x][y] % 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 1] = mlx->map.grid[x][y] / 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 2] = mlx->map.grid[x][y] / 256 / 256;
 			(mlx->img.ptr)[mlx->min_k + 3] = 0;
 			mlx->min_k += 4;
-			mlx->x++;
+			x++;
 		}
-		mlx->y++;
+		y++;
 	}
 }
 

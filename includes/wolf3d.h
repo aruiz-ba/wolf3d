@@ -80,6 +80,8 @@ typedef struct		s_rycst
 	int				texX;
 	int				x;
 	int				side;
+	double			wallX;
+	int				wallh;
 }					t_rycst;
 
 typedef struct		s_mlx
@@ -106,7 +108,7 @@ void	new_image(t_mlx *mlx);
 void	freeimage(char **image_string);
 void	fill_image(t_mlx	*mlx);
 void	set_multythread(t_mlx *mlx);
-void	put_line(int start, int end, t_mlx *mlx);
+void	put_line(int x, int start, int end, t_mlx *mlx);
 void	raycast(t_mlx	*mlx);
 double	map1(double a, double a1, double b0, double b1);
 void	freegrid(t_map *map);

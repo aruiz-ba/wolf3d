@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/24 19:09:53 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/25 20:48:55 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	raycast_loop(t_mlx *mlx)
 			wallX = mlx->ry.posY + perpWallDist * rayDirY;
 		else
 			wallX = mlx->ry.posX + perpWallDist * rayDirX;
-		wallX -= (int)wallX;
+		wallX -= floor(wallX);
 		//xcordinate on the texture
 		int texX;
 
@@ -159,7 +159,9 @@ void	raycast_loop(t_mlx *mlx)
 		mlx->ry.texX = texX;
 		mlx->ry.x = x;
 		mlx->ry.side = side;
-		put_line(drawStart, drawEnd, mlx);
+		mlx->ry.wallX = wallX;
+		mlx->ry.wallh = lineHeight;
+		put_line(x, drawStart, drawEnd, mlx);
 	}
 }
 
