@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/25 20:48:55 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/26 18:39:39 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	raycast_loop(t_mlx *mlx)
 		{
 			if(sideDistX < sideDistY)
 			{
-				sideDistX += deltaDistX;	
+				sideDistX += deltaDistX;
 				mapX	+= stepX;
 				side	= 0;
 			}

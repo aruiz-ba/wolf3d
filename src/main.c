@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/24 19:09:52 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/26 14:15:47 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int		main(int argc, char **argv)
 	load_textures(&mlx);
 	//setall(&mlx);
 	text_to_pixel(&mlx);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.tex.image, 0, 0);
+	fill_image_texture(&mlx);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.image, 0, 0);
 	mlx_hook(mlx.win, 2, 1L << 2, deal_key, &mlx);
 	mlx_loop(mlx.mlx);
 }

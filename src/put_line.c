@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 17:18:00 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/25 20:48:51 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/09/26 18:39:40 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ void	put_line(int x, int start, int end, t_mlx *mlx)
 	while(y < end)
 	{
 		mapy = map2(y, st, en, 0, 64);
-		color = mlx->pix[mlx->ry.texX][mapy];
 		if(mlx->ry.side == 1)
-			color = (color >> 1) & 8355711;
+			color = mlx->tex[0].pix[mlx->ry.texX][mapy];
+		else
+			color = mlx->tex[1].pix[mlx->ry.texX][mapy];
+			//color = (color >> 1) & 8355711;
 		mlx->map.grid[x][y] = color;
 		y++;
 	}
