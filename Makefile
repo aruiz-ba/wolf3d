@@ -6,7 +6,7 @@
 #    By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/28 12:02:51 by aruiz-ba          #+#    #+#              #
-#    Updated: 2019/09/13 19:30:22 by aruiz-ba         ###   ########.fr        #
+#    Updated: 2019/10/03 22:02:41 by aruiz-ba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,10 @@ SRC	= $(addprefix src/, main.c image.c keyboard.c put_line.c read.c raycast.c to
 
 OBJ = $(SRC:.c=.o)
 
-CC		= gcc -g
+CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 
-MLX_LNK	= -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -g
+MLX_LNK	= -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit 
 
 FT		= ./Libft/
 FT_LIB	= $(addprefix $(FT),libft.a)
@@ -39,7 +39,7 @@ $(FT_LIB):
 		make -C $(FT)
 
 $(NAME): $(OBJ)
-		$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
+		$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME) $(CFLAGS)
 
 clean:
 		rm -rf $(OBJ)

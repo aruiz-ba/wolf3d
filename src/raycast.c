@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/03 19:35:03 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/03 21:29:15 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	set_color(int	i, t_map *map)
 
 void	raycast_loop(t_mlx *mlx)
 {
-	int worldMap[mapWidth][mapHeight]=
+/*	int worldMap[mapWidth][mapHeight]=
 	{
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -59,7 +59,7 @@ void	raycast_loop(t_mlx *mlx)
 		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
-
+*/
 	int		x;
 	double	sideDistX;
 	double	sideDistY;
@@ -119,7 +119,7 @@ void	raycast_loop(t_mlx *mlx)
 				mapY += mlx->ry.stepY;
 				side = 1;
 			}
-			if(worldMap[mapX][mapY] > 0)
+			if(mlx->ry.worldMap[mapX][mapY] > 0)
 				hit = 1;
 		}
 		if(side == 0)

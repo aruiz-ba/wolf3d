@@ -9,7 +9,7 @@
 # define WIN_HEIGHT	720//400
 # define texWidth 	64
 # define texHeight	64
-# define P_SPEED	0.05
+# define P_SPEED	0.07
 # define W			13
 # define S			1
 # define A			0
@@ -103,6 +103,10 @@ typedef struct		s_mlx
 	t_image			tex[4];
 	t_map			map;
 	t_rycst			ry;
+	int				move_up;
+	int				move_down;
+	int				move_right;
+	int				move_left;
 }					t_mlx;
 int	deal_key(int key, t_mlx *mlx);
 void	setall(t_mlx *mlx);
@@ -121,3 +125,5 @@ void	load_textures(t_mlx	*mlx);
 void	text_to_pixel(t_mlx *mlx);
 void	fill_image_texture(t_mlx	*mlx);
 double	map2(double a,double a0 ,double a1, double b0, double b1);
+int		key_press(int key, t_mlx *mlx);
+int		key_release(int key, t_mlx *mlx);
