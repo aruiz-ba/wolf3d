@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 17:11:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/26 18:39:43 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/03 20:38:29 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	text_to_pixel(t_mlx *mlx)
 	i = 0;
 
 	min_k = 0;
-	while(i <= 2)//num of textures
+	while(i <= 3)//num of textures
 	{
 		y = 0;
 		min_k = 0;
@@ -65,9 +65,9 @@ void	fill_image_texture(t_mlx	*mlx)
 		tx_x = 0;
 		while (x < 64*8)
 		{
-			(mlx->img.ptr)[mlx->min_k + 0] = mlx->tex[1].pix[tx_x][tx_y] % 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 1] = mlx->tex[1].pix[tx_x][tx_y] / 256 % 256;
-			(mlx->img.ptr)[mlx->min_k + 2] = mlx->tex[1].pix[tx_x][tx_y] / 256 / 256;
+			(mlx->img.ptr)[mlx->min_k + 0] = mlx->tex[3].pix[tx_x][tx_y] % 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 1] = mlx->tex[3].pix[tx_x][tx_y] / 256 % 256;
+			(mlx->img.ptr)[mlx->min_k + 2] = mlx->tex[3].pix[tx_x][tx_y] / 256 / 256;
 			(mlx->img.ptr)[mlx->min_k + 3] = 0;
 			mlx->min_k += 4;
 			if(x%8 == 0)
@@ -95,16 +95,18 @@ void	load_textures(t_mlx	*mlx)
 	a = 64;
 	b = 64;
 	i = 0;
-	while(i <= 2)
+	while(i <= 3)
 	{
 		if(i == 0)
 			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/cobble.xpm", &a, &b);
-		else if(i == 1)
+		if(i == 1)
 			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/stone.xpm", &a, &b);
-		else
+		if(i == 2)
 			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/wood.xpm", &a, &b);
+		if(i == 3)
+			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/woodor.xpm", &a, &b);
 		mlx->tex[i].ptr = mlx_get_data_addr(mlx->tex[i].image, &mlx->tex[i].bpp,
-				&mlx->tex[i].stride, &mlx->tex[i].endian);
+		&mlx->tex[i].stride, &mlx->tex[i].endian);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:21:11 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/25 20:49:05 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/03 18:10:08 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,16 @@ void	write_board(int **out, t_list *ls)
 
 	tm = ls;
 	i = 0;
+
+	int	a = -1;
+
 	while(tm != NULL)
 	{
 		out[i] = intrim(tm->content);
+		while(++a < 24)
+			printf("%i ", out[i][a]);
+		printf("\n");
+		a = -1;
 		next = tm->next;
 		tm = next;
 		i++;
@@ -93,7 +100,7 @@ int		**set_board(t_list *ls)
 	int		**out;
 	int		heigh;
 
-	heigh = linked_list_len(ls);	
+	heigh = linked_list_len(ls);
 	if((out = malloc(sizeof(int) * heigh)) == NULL)
 		exit(0);
 	write_board(out, ls);

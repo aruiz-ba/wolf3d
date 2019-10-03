@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/26 18:39:39 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/03 19:35:03 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	raycast_loop(t_mlx *mlx)
 		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
+
 	int		x;
 	double	sideDistX;
 	double	sideDistY;
@@ -80,30 +81,28 @@ void	raycast_loop(t_mlx *mlx)
 		double	deltaDistX = fabs(1/rayDirX);
 		double	deltaDistY = fabs(1/rayDirY);
 
-		int		stepX;
-		int		stepY;
 		int		side;
 
 		hit	= 0;
 		
 		if(rayDirX < 0)	
 		{
-			stepX = -1;
+			mlx->ry.stepX = -1;
 			sideDistX = (mlx->ry.posX - mapX) * deltaDistX;
 		}
 		else
 		{
-			stepX = 1;
+			mlx->ry.stepX = 1;
 			sideDistX = (mapX + 1.0 - mlx->ry.posX) * deltaDistX;
 		}
 		if(rayDirY < 0)	
 		{
-			stepY = -1;
+			mlx->ry.stepY = -1;
 			sideDistY = (mlx->ry.posY - mapY) * deltaDistY;
 		}
 		else
 		{
-			stepY = 1;
+			mlx->ry.stepY = 1;
 			sideDistY = (mapY + 1.0 - mlx->ry.posY) * deltaDistY;
 		}
 		while(hit == 0)
@@ -111,22 +110,22 @@ void	raycast_loop(t_mlx *mlx)
 			if(sideDistX < sideDistY)
 			{
 				sideDistX += deltaDistX;
-				mapX	+= stepX;
+				mapX	+= mlx->ry.stepX;
 				side	= 0;
 			}
 			else
 			{
 				sideDistY += deltaDistY;
-				mapY += stepY;
+				mapY += mlx->ry.stepY;
 				side = 1;
 			}
 			if(worldMap[mapX][mapY] > 0)
 				hit = 1;
 		}
 		if(side == 0)
-			perpWallDist = (mapX - mlx->ry.posX + (1 - stepX) / 2) / rayDirX;
+			perpWallDist = (mapX - mlx->ry.posX + (1 - mlx->ry.stepX) / 2) / rayDirX;
 		else
-			perpWallDist = (mapY - mlx->ry.posY + (1 - stepY) / 2) / rayDirY;
+			perpWallDist = (mapY - mlx->ry.posY + (1 - mlx->ry.stepY) / 2) / rayDirY;
 		int lineHeight = (int)(WIN_HEIGHT / perpWallDist);
 
 		int	drawStart = (-lineHeight / 2) + (WIN_HEIGHT / 2);
@@ -135,7 +134,7 @@ void	raycast_loop(t_mlx *mlx)
 		int drawEnd = (lineHeight / 2) + (WIN_HEIGHT / 2);
 		if(drawEnd >= WIN_HEIGHT)
 			drawEnd = WIN_HEIGHT - 1;
-		set_color(worldMap[mapX][mapY], &mlx->map);
+	//	set_color(mlx->ry.worldMap[mapX][mapY], &mlx->map);
 		if(side == 1)
 			mlx->map.color /= 2;
 

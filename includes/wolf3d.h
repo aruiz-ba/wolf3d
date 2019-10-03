@@ -83,6 +83,8 @@ typedef struct		s_rycst
 	int				side;
 	double			wallX;
 	int				wallh;
+	int				stepX;
+	int				stepY;
 }					t_rycst;
 
 typedef struct		s_mlx
@@ -98,7 +100,7 @@ typedef struct		s_mlx
 	double			posX;
 	double			posY;
 	t_image			img;
-	t_image			tex[3];
+	t_image			tex[4];
 	t_map			map;
 	t_rycst			ry;
 }					t_mlx;
