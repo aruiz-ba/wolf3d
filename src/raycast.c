@@ -6,60 +6,28 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/03 21:29:15 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/08 18:31:45 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf3d.h>
-#define	mapWidth 24
-#define mapHeight 24
-
-
 
 void	set_color(int	i, t_map *map)
 {
-	if(i == 1)
+	if (i == 1)
 		map->color = RGB_Red;
-	if(i == 2)
+	if (i == 2)
 		map->color = RGB_Green;
-	if(i == 3)
+	if (i == 3)
 		map->color = RGB_Blue;
-	if(i == 4)
+	if (i == 4)
 		map->color = RGB_White;
-	if(i > 4)
+	if (i > 4)
 		map->color = RGB_Yellow;
 }
 
 void	raycast_loop(t_mlx *mlx)
 {
-/*	int worldMap[mapWidth][mapHeight]=
-	{
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,2,2,2,5,5,5,5,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
-*/
 	int		x;
 	double	sideDistX;
 	double	sideDistY;
@@ -69,7 +37,7 @@ void	raycast_loop(t_mlx *mlx)
 	int		hit;
 
 	x = -1;
-	while(++x < WIN_WIDTH)
+	while (++x < WIN_WIDTH)
 	{
 		double	cameraX = 2 * x / (double)(WIN_WIDTH) - 1; //check this out
 		double	rayDirX = mlx->ry.dirX + mlx->ry.planeX * cameraX;
@@ -78,14 +46,14 @@ void	raycast_loop(t_mlx *mlx)
 		int		mapX = (int)(mlx->ry.posX);
 		int		mapY = (int)(mlx->ry.posY);
 		
-		double	deltaDistX = fabs(1/rayDirX);
-		double	deltaDistY = fabs(1/rayDirY);
+		double	deltaDistX = fabs(1 / rayDirX);
+		double	deltaDistY = fabs(1 / rayDirY);
 
 		int		side;
 
 		hit	= 0;
 		
-		if(rayDirX < 0)	
+		if (rayDirX < 0)	
 		{
 			mlx->ry.stepX = -1;
 			sideDistX = (mlx->ry.posX - mapX) * deltaDistX;
@@ -95,7 +63,7 @@ void	raycast_loop(t_mlx *mlx)
 			mlx->ry.stepX = 1;
 			sideDistX = (mapX + 1.0 - mlx->ry.posX) * deltaDistX;
 		}
-		if(rayDirY < 0)	
+		if (rayDirY < 0)	
 		{
 			mlx->ry.stepY = -1;
 			sideDistY = (mlx->ry.posY - mapY) * deltaDistY;
@@ -105,9 +73,9 @@ void	raycast_loop(t_mlx *mlx)
 			mlx->ry.stepY = 1;
 			sideDistY = (mapY + 1.0 - mlx->ry.posY) * deltaDistY;
 		}
-		while(hit == 0)
+		while (hit == 0)
 		{
-			if(sideDistX < sideDistY)
+			if (sideDistX < sideDistY)
 			{
 				sideDistX += deltaDistX;
 				mapX	+= mlx->ry.stepX;
@@ -119,29 +87,29 @@ void	raycast_loop(t_mlx *mlx)
 				mapY += mlx->ry.stepY;
 				side = 1;
 			}
-			if(mlx->ry.worldMap[mapX][mapY] > 0)
+			if (mlx->ry.worldMap[mapX][mapY] > 0)
 				hit = 1;
 		}
-		if(side == 0)
+		if (side == 0)
 			perpWallDist = (mapX - mlx->ry.posX + (1 - mlx->ry.stepX) / 2) / rayDirX;
 		else
 			perpWallDist = (mapY - mlx->ry.posY + (1 - mlx->ry.stepY) / 2) / rayDirY;
 		int lineHeight = (int)(WIN_HEIGHT / perpWallDist);
 
 		int	drawStart = (-lineHeight / 2) + (WIN_HEIGHT / 2);
-		if(drawStart < 0)
+		if (drawStart < 0)
 			drawStart = 0;
 		int drawEnd = (lineHeight / 2) + (WIN_HEIGHT / 2);
-		if(drawEnd >= WIN_HEIGHT)
+		if (drawEnd >= WIN_HEIGHT)
 			drawEnd = WIN_HEIGHT - 1;
 	//	set_color(mlx->ry.worldMap[mapX][mapY], &mlx->map);
-		if(side == 1)
+		if (side == 1)
 			mlx->map.color /= 2;
 
 
 		double wallX;	//where exacly wall was hit
 
-		if(side == 0)
+		if (side == 0)
 			wallX = mlx->ry.posY + perpWallDist * rayDirY;
 		else
 			wallX = mlx->ry.posX + perpWallDist * rayDirX;
@@ -150,9 +118,9 @@ void	raycast_loop(t_mlx *mlx)
 		int texX;
 
 		texX = (int)(wallX * (double)texWidth);
-		if(side == 0 && rayDirX > 0)
+		if (side == 0 && rayDirX > 0)
 			texX = texWidth - texX - 1;
-		if(side == 1 && rayDirY < 0)
+		if (side == 1 && rayDirY < 0)
 			texX = texWidth - texX -1;
 		mlx->ry.lineHeight = lineHeight;
 		mlx->ry.texX = texX;

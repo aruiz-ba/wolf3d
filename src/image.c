@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:02:24 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/25 14:32:58 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/08 17:06:50 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	freeimage(char **image_string)
 	}
 }
 
-void	fill_image(t_mlx	*mlx)
+void	fill_image(t_mlx *mlx)
 {
 	int		x;
 	int		y;
@@ -78,6 +78,6 @@ void	fill_image(t_mlx	*mlx)
 void	new_image(t_mlx *mlx)
 {
 	mlx->img.image = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-	mlx->img.ptr = mlx_get_data_addr(mlx->img.image, &mlx->img.bpp, &mlx->img.stride,
-	&mlx->img.endian);
+	mlx->img.ptr = mlx_get_data_addr(mlx->img.image, &mlx->img.bpp,
+	&mlx->img.stride, &mlx->img.endian);
 }

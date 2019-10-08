@@ -6,29 +6,28 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 14:12:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/03 21:02:03 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/08 18:46:31 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf3d.h>
 
-
-void	setall(t_mlx *mlx)
+int		setall(t_mlx *mlx)
 {
-	if(mlx->move_up == 1)
+	if (mlx->move_right == 1)
+		mlx->rot -= 0.06;
+	if (mlx->move_left == 1)
+		mlx->rot += 0.06;
+	if (mlx->move_up == 1)
 	{
 		mlx->posY += mlx->ry.dirY * P_SPEED;
 		mlx->posX += mlx->ry.dirX * P_SPEED;
 	}
-	if(mlx->move_down == 1)
+	if (mlx->move_down == 1)
 	{
 		mlx->posY -= mlx->ry.dirY * P_SPEED;
 		mlx->posX -= mlx->ry.dirX * P_SPEED;
 	}
-	if(mlx->move_right == 1)
-		mlx->rot -= 0.06;
-	if(mlx->move_left == 1)
-		mlx->rot += 0.06;
 	mlx->y = 0;
 	mlx->x = 0;
 	mlx->min_k = 0;
@@ -36,10 +35,10 @@ void	setall(t_mlx *mlx)
 	freegrid(&mlx->map);
 	mlx_clear_window(mlx->mlx, mlx->win);
 	text_to_pixel(mlx);
-//	fill_image_texture(mlx);
 	raycast(mlx);
 	fill_image(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.image, 0, 0);
+	return (0);
 }
 
 int		deal_key(int key, t_mlx *mlx)
@@ -70,6 +69,7 @@ int		deal_key(int key, t_mlx *mlx)
 		exit(0);
 	return (1);
 }
+
 int		key_press(int key, t_mlx *mlx)
 {
 	if (key == A)
@@ -85,6 +85,7 @@ int		key_press(int key, t_mlx *mlx)
 	setall(mlx);
 	return (1);
 }
+
 int		key_release(int key, t_mlx *mlx)
 {
 	if (key == A)
@@ -97,6 +98,5 @@ int		key_release(int key, t_mlx *mlx)
 		mlx->move_down = 0;
 	if (key == ESC)
 		exit(0);
-	setall(mlx);
 	return (1);
 }

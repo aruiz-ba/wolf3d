@@ -9,7 +9,7 @@
 # define WIN_HEIGHT	720//400
 # define texWidth 	64
 # define texHeight	64
-# define P_SPEED	0.07
+# define P_SPEED	0.05
 # define W			13
 # define S			1
 # define A			0
@@ -108,8 +108,8 @@ typedef struct		s_mlx
 	int				move_right;
 	int				move_left;
 }					t_mlx;
-int	deal_key(int key, t_mlx *mlx);
-void	setall(t_mlx *mlx);
+int		deal_key(int key, t_mlx *mlx);
+int		setall(t_mlx *mlx);
 void	new_image(t_mlx *mlx);
 void	freeimage(char **image_string);
 void	fill_image(t_mlx	*mlx);
