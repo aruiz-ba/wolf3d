@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 14:12:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/08 18:46:31 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:39:38 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int		setall(t_mlx *mlx)
 	freeimage(&mlx->img.ptr);
 	freegrid(&mlx->map);
 	mlx_clear_window(mlx->mlx, mlx->win);
-	text_to_pixel(mlx);
 	raycast(mlx);
 	fill_image(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.image, 0, 0);

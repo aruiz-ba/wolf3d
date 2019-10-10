@@ -6,11 +6,18 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/10 14:59:21 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/10 19:10:12 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf3d.h>
+
+void	error(int	i)
+{
+	if(i == 0)	
+		ft_putstr("The map border is open");
+	exit(0);
+}
 
 int		main(int argc, char **argv)
 {
@@ -32,10 +39,12 @@ int		main(int argc, char **argv)
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "wolf3d");
 	new_image(&mlx);
-	mlx.ry.worldMap = set_board(map);
+	mlx.ry.worldMap = set_board(map, &mlx);
+	if(test_board(&mlx) == 0)
+		error(0);
 	load_textures(&mlx);
 	text_to_pixel(&mlx);
-	fill_image_texture(&mlx);
+	setall(&mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.image, 0, 0);
 	mlx_hook(mlx.win, 2, (1L << 0), key_press, &mlx);
 	mlx_hook(mlx.win, 3, (1L << 1), key_release, &mlx);
