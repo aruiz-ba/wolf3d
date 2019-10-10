@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/13 17:11:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/03 20:38:29 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/10 16:09:39 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ void	load_textures(t_mlx	*mlx)
 	while(i <= 3)
 	{
 		if(i == 0)
-			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/cobble.xpm", &a, &b);
+			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/dirt.xpm", &a, &b);
 		if(i == 1)
-			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/stone.xpm", &a, &b);
+			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/nether_bricks.xpm", &a, &b);
 		if(i == 2)
-			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/wood.xpm", &a, &b);
+			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/stone_bricks.xpm", &a, &b);
 		if(i == 3)
-			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/woodor.xpm", &a, &b);
+			mlx->tex[i].image = mlx_xpm_file_to_image(mlx->mlx, "textures/end_bricks.xpm", &a, &b);
 		mlx->tex[i].ptr = mlx_get_data_addr(mlx->tex[i].image, &mlx->tex[i].bpp,
 		&mlx->tex[i].stride, &mlx->tex[i].endian);
 		i++;
