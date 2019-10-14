@@ -6,11 +6,12 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 11:36:47 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/09/24 19:09:48 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:14:08 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
 double	map1(double a, double a1, double b0, double b1)
 {
 	int		a0;

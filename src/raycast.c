@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/08 18:31:45 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:26:19 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	raycast_loop(t_mlx *mlx)
 				mapY += mlx->ry.stepY;
 				side = 1;
 			}
-			if (mlx->ry.worldMap[mapX][mapY] > 0)
+			if (mlx->ry.worldMap[mapX][mapY] == 1)
 				hit = 1;
 		}
 		if (side == 0)

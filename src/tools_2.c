@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_error.c                                       :+:      :+:    :+:   */
+/*   tools_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 17:45:02 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/14 17:47:55 by aruiz-ba         ###   ########.fr       */
+/*   Created: 2019/10/14 17:52:36 by aruiz-ba          #+#    #+#             */
+/*   Updated: 2019/10/14 19:34:13 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int	test_board(t_mlx *mlx)
+int	get_player_pos(t_mlx *mlx)
 {
 	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
 	while(y < mlx->ry.mapHeight)
 	{
+		x = 0;
 		while(x < mlx->ry.mapWidth)
 		{
-			if(mlx->ry.worldMap[0][x] != 1)
-				return(0);
-			if(mlx->ry.worldMap[mlx->ry.mapHeight - 1][x] != 1)
-				return(0);
-			x++;	
+			if(mlx->ry.worldMap[y][x] == 2)
+			{
+				mlx->posX = y;
+				mlx->posY = x;
+				return(1);
+			}
+			x++;
 		}
-		x = 0;
-		if(mlx->ry.worldMap[y][0] != 1)
-			return(0);
-		if(mlx->ry.worldMap[y][mlx->ry.mapHeight - 1] != 1)
-			return(0);
 		y++;
 	}
-	return(1);
+	return(0);
 }
