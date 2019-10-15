@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:21:11 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/14 19:46:16 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/15 15:01:19 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,15 @@ int		*intrim(char const *s, t_mlx *mlx)
 	{
 		if (s[i] != ' ' && (s[i + 1] == ' ' || s[i + 1] == '\0'))//protect num more than 1 dig
 		{
+			if ((s[i] - '0') > 2 || (s[i] - '0') < 0)
+				return (NULL);
 			array[a] = s[i] - '0';
 			a++;
 		}
+		else if (s[i] != ' ' && s[i + 1] != ' ')
+			return (NULL);
+		else if (s[i] == ' ' && s[i + 1] == ' ')
+			return (NULL);
 		i++;
 	}
 	return (array);
@@ -72,7 +78,7 @@ int		linked_list_len(t_list *ls)
 	return (out);
 }
 
-void	write_board(int **out, t_list *ls, t_mlx *mlx)
+int	write_board(int **out, t_list *ls, t_mlx *mlx)
 {
 	t_list	*tm;
 	int		i;
@@ -81,10 +87,12 @@ void	write_board(int **out, t_list *ls, t_mlx *mlx)
 	i = 0;
 	while (tm != NULL)
 	{
-		out[i] = intrim(tm->content, mlx);
+		if ((out[i] = intrim(tm->content, mlx)) == NULL)
+			return (0);
 		tm = tm->next;
 		i++;
 	}
+	return (1);
 }
 
 int		**set_board(t_list *ls, t_mlx *mlx)
@@ -96,6 +104,7 @@ int		**set_board(t_list *ls, t_mlx *mlx)
 	if ((out = malloc(sizeof(int*) * height)) == NULL)
 		exit(0);
 	mlx->ry.mapHeight = height;
-	write_board(out, ls, mlx);
+	if (write_board(out, ls, mlx) == 0)
+		return (NULL);
 	return (out);
 }

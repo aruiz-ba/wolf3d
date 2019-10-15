@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 14:12:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/14 17:57:17 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/15 18:13:52 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ int		setall(t_mlx *mlx)
 		mlx->rot += 0.06;
 	if (mlx->move_up == 1)
 	{
-		mlx->posY += mlx->ry.dirY * P_SPEED;
-		mlx->posX += mlx->ry.dirX * P_SPEED;
+		if ((mlx->posY > 1.1 && mlx->posY < ((double)mlx->ry.mapHeight - 1.1)) || mlx->ry.dirY > 0)
+			mlx->posY += mlx->ry.dirY * P_SPEED;
+		if ((mlx->posX > 1.1 && mlx->posX < ((double)mlx->ry.mapWidth - 1.1)) || (mlx->ry.dirX > 0)
+			mlx->posX += mlx->ry.dirX * P_SPEED;
+		printf("dirx:%f\ndiry:%f\n\n", mlx->ry.dirX, mlx->ry.dirY);
 	}
 	if (mlx->move_down == 1)
 	{

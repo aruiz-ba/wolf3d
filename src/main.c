@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/14 19:21:16 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/15 14:24:57 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 
 void	error(int	i)
 {
-	if (i == 0)	
-		ft_putstr("The map border is openi\n");
-	if (i == 1)
-		ft_putstr("No player on map\n");
+	ft_putstr("Error:");
+	if (i == 0)
+	{
+		ft_putstr("Wrong number of spaces or number value in map\n");
+		ft_putstr("Usage:\n*1 for walls\n*2 for player\n*0 for gaps\n*Only one space between them");
+	}
+	if (i == 1)	
+		ft_putstr("The map border is open\n");
 	if (i == 2)
+		ft_putstr("No player on map\n");
+	if (i == 3)
 		ft_putstr("Not valid map number. Use only 1 for walls and 2 for P pos\n");
 	exit(0);
 }
@@ -42,13 +48,14 @@ int		main(int argc, char **argv)
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "wolf3d");
 	new_image(&mlx);
-	mlx.ry.worldMap = set_board(map, &mlx);
-	if (test_board(&mlx) == 0)
+	if((mlx.ry.worldMap = set_board(map, &mlx)) == NULL)
 		error(0);
-	if ((er = get_player_pos(&mlx)) == 0)
+	if (test_board(&mlx) == 0)
 		error(1);
-	if (er == -1)
+	if ((er = get_player_pos(&mlx)) == 0)
 		error(2);
+	if (er == -1)
+		error(3);
 	load_textures(&mlx);
 	text_to_pixel(&mlx);
 	setall(&mlx);

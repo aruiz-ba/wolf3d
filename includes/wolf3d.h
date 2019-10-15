@@ -89,7 +89,7 @@ typedef struct		s_rycst
 	int			stepY;
 }				t_rycst;
 
-typedef struct		s_mlx
+typedef struct			s_mlx
 {
 	void			*mlx;
 	void			*win;
