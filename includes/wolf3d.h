@@ -14,6 +14,7 @@
 # define S			1
 # define A			0
 # define D			2
+# define SHIFT			257
 # define ESC		53
 # define RGB_Red	0xFF0000
 # define RGB_Green	0x00FF00
@@ -101,6 +102,7 @@ typedef struct			s_mlx
 	double			rot;
 	double			posX;
 	double			posY;
+	double			sprint;
 	t_image			img;
 	t_image			tex[4];
 	t_map			map;
@@ -109,6 +111,7 @@ typedef struct			s_mlx
 	int			move_down;
 	int			move_right;
 	int			move_left;
+	int			move_sprint;
 }				t_mlx;
 int	deal_key(int key, t_mlx *mlx);
 int	setall(t_mlx *mlx);

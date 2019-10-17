@@ -6,13 +6,13 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/14 18:26:19 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/17 19:28:35 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf3d.h>
 
-void	set_color(int	i, t_map *map)
+void	set_color(int i, t_map *map)
 {
 	if (i == 1)
 		map->color = RGB_Red;

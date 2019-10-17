@@ -6,21 +6,22 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/15 14:24:57 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/17 16:41:22 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf3d.h>
 
-void	error(int	i)
+void	error(int i)
 {
 	ft_putstr("Error:");
 	if (i == 0)
 	{
 		ft_putstr("Wrong number of spaces or number value in map\n");
-		ft_putstr("Usage:\n*1 for walls\n*2 for player\n*0 for gaps\n*Only one space between them");
+		ft_putstr("Usage:\n*1 for walls\n*2 for player\n");
+		ft_putstr("0 for gaps\n*Only one space between them");
 	}
-	if (i == 1)	
+	if (i == 1)
 		ft_putstr("The map border is open\n");
 	if (i == 2)
 		ft_putstr("No player on map\n");
@@ -29,13 +30,13 @@ void	error(int	i)
 	exit(0);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_mlx mlx;
-	t_list *map;
-	int		ln;
-	int		dt;
-	int		er;
+	t_mlx	mlx;
+	t_list	*map;
+	int	ln;
+	int	dt;
+	int	er;
 
 	if (argc != 2)
 		return (0);
@@ -45,10 +46,11 @@ int		main(int argc, char **argv)
 	mlx.x = 0;
 	mlx.min_k = 0;
 	mlx.rot = 0;
+	mlx.sprint = 0;
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "wolf3d");
 	new_image(&mlx);
-	if((mlx.ry.worldMap = set_board(map, &mlx)) == NULL)
+	if ((mlx.ry.worldMap = set_board(map, &mlx)) == NULL)
 		error(0);
 	if (test_board(&mlx) == 0)
 		error(1);

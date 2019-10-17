@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:21:11 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/15 15:01:19 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/16 18:19:40 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		linked_list_len(t_list *ls)
 	return (out);
 }
 
-int	write_board(int **out, t_list *ls, t_mlx *mlx)
+int		write_board(int **out, t_list *ls, t_mlx *mlx)
 {
 	t_list	*tm;
 	int		i;
