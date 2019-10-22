@@ -6,11 +6,27 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:52:36 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/17 19:27:28 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/22 18:01:56 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+int	digitnum(char const *s)
+{
+	int		i;
+	int		digitnum;
+
+	i = 0;
+	digitnum = 0;
+	while (s[i])
+	{
+		if (s[i] != ' ' && (s[i + 1] == ' ' || s[i + 1] == '\0'))
+			digitnum++;
+		i++;
+	}
+	return (digitnum);
+}
 
 double	map1(double a, double a1, double b0, double b1)
 {
@@ -20,9 +36,10 @@ double	map1(double a, double a1, double b0, double b1)
 	return (b0 + (b1 - b0) * ((a - a0) / (a1 - a0)));
 }
 
-double	map2(double a, double a0, double a1, double b0, double b1)
+double	map2(t_map2 *mp)
 {
-	return (b0 + (b1 - b0) * ((a - a0) / (a1 - a0)));
+	return (mp->b0 + (mp->b1 - mp->b0) *
+			((mp->a - mp->a0) / (mp->a1 - mp->a0)));
 }
 
 int	get_player_pos(t_mlx *mlx)

@@ -6,59 +6,48 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:21:11 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/16 18:19:40 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/22 18:26:41 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		digitnum(char const *s)
+int		sub_intrim(t_intrim *in, char const *s)
 {
-	int		i;
-	int		digitnum;
-
-	i = 0;
-	digitnum = 0;
-	while (s[i])
+	if (s[in->i] != ' ' && (s[in->i + 1] == ' ' || s[in->i + 1] == '\0'))
 	{
-		if (s[i] != ' ' && (s[i + 1] == ' ' || s[i + 1] == '\0'))
-			digitnum++;
-		i++;
+		if ((s[in->i] - '0') > 2 || (s[in->i] - '0') < 0)
+			return (-1);
+		in->array[in->a] = s[in->i] - '0';
+		in->a++;
 	}
-	return (digitnum);
+	else if (s[in->i] != ' ' && s[in->i + 1] != ' ')
+		return (-1);
+	else if (s[in->i] == ' ' && s[in->i + 1] == ' ')
+		return (-1);
+	return (1);
 }
 
 int		*intrim(char const *s, t_mlx *mlx)
 {
-	int		i;
-	int		digitn;
-	int		a;
-	int		*array;
+	t_intrim	in;
 
+	in.a = 0;
 	if (!s)
 		return (NULL);
-	i = 0;
-	a = 0;
-	digitn = digitnum(s);
-	if (!(array = malloc(sizeof(int) * (digitn))))
+	in.i = 0;
+	in.a = 0;
+	in.digitn = digitnum(s);
+	if (!(in.array = malloc(sizeof(int) * (in.digitn))))
 		return (NULL);
-	mlx->ry.mapWidth = digitn;
-	while (s[i])
+	mlx->ry.mapWidth = in.digitn;
+	while (s[in.i])
 	{
-		if (s[i] != ' ' && (s[i + 1] == ' ' || s[i + 1] == '\0'))//protect num more than 1 dig
-		{
-			if ((s[i] - '0') > 2 || (s[i] - '0') < 0)
-				return (NULL);
-			array[a] = s[i] - '0';
-			a++;
-		}
-		else if (s[i] != ' ' && s[i + 1] != ' ')
+		if (sub_intrim(&in, s) == -1)
 			return (NULL);
-		else if (s[i] == ' ' && s[i + 1] == ' ')
-			return (NULL);
-		i++;
+		in.i++;
 	}
-	return (array);
+	return (in.array);
 }
 
 int		linked_list_len(t_list *ls)

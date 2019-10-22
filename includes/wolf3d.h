@@ -69,6 +69,14 @@ typedef struct		s_point
 	double			y;
 }					t_point;
 
+typedef struct			s_intrim
+{
+	int			i;
+	int			digitn;
+	int			*array;
+	int			a;
+}				t_intrim;
+
 typedef struct		s_rycst
 {
 	double			posX;
@@ -89,6 +97,15 @@ typedef struct		s_rycst
 	int			stepX;
 	int			stepY;
 }				t_rycst;
+
+typedef struct			s_map2
+{
+	double			a;
+	double			a0;
+	double			a1;
+	double			b0;
+	double			b1;
+}				t_map2;
 
 typedef struct			s_mlx
 {
@@ -122,6 +139,7 @@ void	set_multythread(t_mlx *mlx);
 void	put_line(int x, int start, int end, t_mlx *mlx);
 void	raycast(t_mlx	*mlx);
 double	map1(double a, double a1, double b0, double b1);
+double	map2(t_map2 *mp);
 void	freegrid(t_map *map);
 t_list	*reverse(t_list *head);
 t_list	*ft_parse_file(char *root, int *ln, int *dt);
@@ -129,8 +147,8 @@ int	**set_board(t_list *ls, t_mlx *mlx);
 void	load_textures(t_mlx	*mlx);
 void	text_to_pixel(t_mlx *mlx);
 void	fill_image_texture(t_mlx	*mlx);
-double	map2(double a,double a0 ,double a1, double b0, double b1);
 int	key_press(int key, t_mlx *mlx);
 int	key_release(int key, t_mlx *mlx);
 int	test_board(t_mlx *mlx);
 int	get_player_pos(t_mlx *mlx);
+int	digitnum(char const *s);
