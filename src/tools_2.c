@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tools_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:52:36 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/22 18:01:56 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/24 18:38:25 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int	digitnum(char const *s)
+int		digitnum(char const *s)
 {
 	int		i;
 	int		digitnum;
@@ -42,7 +42,7 @@ double	map2(t_map2 *mp)
 			((mp->a - mp->a0) / (mp->a1 - mp->a0)));
 }
 
-int	get_player_pos(t_mlx *mlx)
+int		get_player_pos(t_mlx *mlx)
 {
 	int	x;
 	int	y;

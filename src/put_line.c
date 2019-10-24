@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 17:18:00 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/18 18:39:48 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/24 18:36:33 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	put_line(int x, int start, int end, t_mlx *mlx)
 {
 	t_map2	mp;
-	int	mapy;
-	int	color;
+	int		mapy;
+	int		color;
 
 	mlx->ry.wallh /= 2;
 	mp.a0 = (WIN_HEIGHT / 2) - mlx->ry.wallh;

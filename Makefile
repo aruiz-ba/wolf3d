@@ -6,7 +6,7 @@
 #    By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/28 12:02:51 by aruiz-ba          #+#    #+#              #
-#    Updated: 2019/10/22 18:26:44 by aruiz-ba         ###   ########.fr        #
+#    Updated: 2019/10/24 19:07:12 by aruiz-ba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRC	= $(addprefix src/, main.c image.c keyboard.c put_line.c raycast.c tools.c b
 
 OBJ = $(SRC:.c=.o)
 
-CC		= gcc
+CC	=  gcc
 CFLAGS	=  -Wall -Wextra -Werror
 
 MLX_LNK	= -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit 

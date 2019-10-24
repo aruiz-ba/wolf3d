@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/18 18:49:17 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/24 19:31:48 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	set_color(int i, t_map *map)
 {
 	if (i == 1)
-		map->color = RGB_Red;
+		map->color = RGB_RED;
 	if (i == 2)
-		map->color = RGB_Green;
+		map->color = RGB_GREEN;
 	if (i == 3)
-		map->color = RGB_Blue;
+		map->color = RGB_BLUE;
 	if (i == 4)
-		map->color = RGB_White;
+		map->color = RGB_WHITE;
 	if (i > 4)
-		map->color = RGB_Yellow;
+		map->color = RGB_YELLOW;
 }
 
 void	raycast_loop(t_mlx *mlx)
@@ -112,11 +112,11 @@ void	raycast_loop(t_mlx *mlx)
 		//xcordinate on the texture
 		int texX;
 
-		texX = (int)(wallX * (double)texWidth);
+		texX = (int)(wallX * (double)TEXWIDTH);
 		if (side == 0 && rayDirX > 0)
-			texX = texWidth - texX - 1;
+			texX = TEXWIDTH - texX - 1;
 		if (side == 1 && rayDirY < 0)
-			texX = texWidth - texX - 1;
+			texX = TEXWIDTH - texX - 1;
 		mlx->ry.lineHeight = lineHeight;
 		mlx->ry.texX = texX;
 		mlx->ry.x = x;

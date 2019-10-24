@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/22 18:26:45 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/24 19:07:15 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,27 @@ void	if_error(t_mlx *mlx, t_list *map)
 		error(3);
 }
 
-int	main(int argc, char **argv)
+void	set_mlx(t_mlx *mlx)
+{
+	mlx->y = 0;
+	mlx->x = 0;
+	mlx->min_k = 0;
+	mlx->rot = 0;
+	mlx->sprint = 0;
+}
+
+int		main(int argc, char **argv)
 {
 	t_mlx	mlx;
 	t_list	*map;
-	int	ln;
-	int	dt;
+	int		ln;
+	int		dt;
 
 	if (argc != 2)
 		return (0);
 	if ((map = ft_parse_file(argv[1], &ln, &dt)) == NULL)
 		return (0);
-	mlx.y = 0;
-	mlx.x = 0;
-	mlx.min_k = 0;
-	mlx.rot = 0;
-	mlx.sprint = 0;
+	set_mlx(&mlx);
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "wolf3d");
 	new_image(&mlx);
