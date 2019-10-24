@@ -14,24 +14,24 @@
 
 void		sub_setall_up(t_mlx *mlx)
 {
-	if (mlx->posX < (mlx->ry.mapWidth / 2))
+	if (mlx->posX < (mlx->ry.mapHeight / 2))
 	{
 		if (mlx->posX > 1.1 || mlx->ry.dirX > 0)
 			mlx->posX += mlx->ry.dirX * (P_SPEED + mlx->sprint);
 	}
 	else
 	{
-		if ((mlx->posX < (mlx->ry.mapWidth - 1.1)) || mlx->ry.dirX < 0)
+		if ((mlx->posX < (mlx->ry.mapHeight - 1.1)) || mlx->ry.dirX < 0)
 			mlx->posX += mlx->ry.dirX * (P_SPEED + mlx->sprint);
 	}
-	if (mlx->posY < (mlx->ry.mapHeight / 2))
+	if (mlx->posY < (mlx->ry.mapWidth / 2))
 	{
 		if (mlx->posY > 1.1 || mlx->ry.dirY > 0)
 			mlx->posY += mlx->ry.dirY * (P_SPEED + mlx->sprint);
 	}
 	else
 	{
-		if ((mlx->posY < (mlx->ry.mapHeight - 1.1)) || mlx->ry.dirY < 0)
+		if ((mlx->posY < (mlx->ry.mapWidth - 1.1)) || mlx->ry.dirY < 0)
 			mlx->posY += mlx->ry.dirY * (P_SPEED + mlx->sprint);
 	}
 }
@@ -40,22 +40,22 @@ void		sub_setall_down(t_mlx *mlx)
 {
 	if (mlx->posX < (mlx->ry.mapWidth / 2))
 	{
-		if (mlx->posX > 1.1 || mlx->ry.dirX > 0)
+		if (mlx->posX > 1.1 || mlx->ry.dirX < 0)
 			mlx->posX -= mlx->ry.dirX * (P_SPEED + mlx->sprint);
 	}
 	else
 	{
-		if ((mlx->posX < (mlx->ry.mapWidth - 1.1)) || mlx->ry.dirX < 0)
+		if ((mlx->posX < (mlx->ry.mapWidth - 1.1)) || mlx->ry.dirX > 0)
 			mlx->posX -= mlx->ry.dirX * (P_SPEED + mlx->sprint);
 	}
 	if (mlx->posY < (mlx->ry.mapHeight / 2))
 	{
-		if (mlx->posY > 1.1 || mlx->ry.dirY > 0)
+		if (mlx->posY > 1.1 || mlx->ry.dirY < 0)
 			mlx->posY -= mlx->ry.dirY * (P_SPEED + mlx->sprint);
 	}
 	else
 	{
-		if ((mlx->posY < (mlx->ry.mapHeight - 1.1)) || mlx->ry.dirY < 0)
+		if ((mlx->posY < (mlx->ry.mapHeight - 1.1)) || mlx->ry.dirY > 0)
 			mlx->posY -= mlx->ry.dirY * (P_SPEED + mlx->sprint);
 	}
 }
@@ -73,9 +73,9 @@ int		setall(t_mlx *mlx)
 		sub_setall_up(mlx);
 	if (mlx->move_down == 1)
 	{
-		sub_setall_down(mlx);
-		//mlx->posY -= mlx->ry.dirY * P_SPEED;
-		//mlx->posX -= mlx->ry.dirX * P_SPEED;
+		//sub_setall_down(mlx);
+		mlx->posY -= mlx->ry.dirY * P_SPEED;
+		mlx->posX -= mlx->ry.dirX * P_SPEED;
 	}
 	mlx->y = 0;
 	mlx->x = 0;
@@ -86,6 +86,7 @@ int		setall(t_mlx *mlx)
 	raycast(mlx);
 	fill_image(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.image, 0, 0);
+	printf("rotX%f\n", mlx->ry.dirX);
 	return (0);
 }
 
