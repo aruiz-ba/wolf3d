@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 14:12:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/24 18:30:55 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/31 15:19:14 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,49 @@
 
 void	sub_setall_up(t_mlx *mlx)
 {
-	if (mlx->posX < (mlx->ry.mapHeight / (double)2))
+	if (mlx->posx < (mlx->ry.mapheight / (double)2))
 	{
-		if (mlx->posX > 1.1 || mlx->ry.dirX > 0)
-			mlx->posX += mlx->ry.dirX * (P_SPEED + mlx->sprint);
+		if (mlx->posx > 1.1 || mlx->ry.dirx > 0)
+			mlx->posx += mlx->ry.dirx * (P_SPEED + mlx->sprint);
 	}
 	else
 	{
-		if ((mlx->posX < (mlx->ry.mapHeight - 1.1)) || mlx->ry.dirX < 0)
-			mlx->posX += mlx->ry.dirX * (P_SPEED + mlx->sprint);
+		if ((mlx->posx < (mlx->ry.mapheight - 1.1)) || mlx->ry.dirx < 0)
+			mlx->posx += mlx->ry.dirx * (P_SPEED + mlx->sprint);
 	}
-	if (mlx->posY < (mlx->ry.mapWidth / (double)2))
+	if (mlx->posy < (mlx->ry.mapwidth / (double)2))
 	{
-		if (mlx->posY > 1.1 || mlx->ry.dirY > 0)
-			mlx->posY += mlx->ry.dirY * (P_SPEED + mlx->sprint);
+		if (mlx->posy > 1.1 || mlx->ry.diry > 0)
+			mlx->posy += mlx->ry.diry * (P_SPEED + mlx->sprint);
 	}
 	else
 	{
-		if ((mlx->posY < (mlx->ry.mapWidth - 1.1)) || mlx->ry.dirY < 0)
-			mlx->posY += mlx->ry.dirY * (P_SPEED + mlx->sprint);
+		if ((mlx->posy < (mlx->ry.mapwidth - 1.1)) || mlx->ry.diry < 0)
+			mlx->posy += mlx->ry.diry * (P_SPEED + mlx->sprint);
 	}
 }
 
 void	sub_setall_down(t_mlx *mlx)
 {
-	if (mlx->posX < (mlx->ry.mapHeight / (double)2))
+	if (mlx->posx < (mlx->ry.mapheight / (double)2))
 	{
-		if (mlx->posX > 1.1 || mlx->ry.dirX < 0)
-			mlx->posX -= mlx->ry.dirX * (P_SPEED + mlx->sprint);
+		if (mlx->posx > 1.1 || mlx->ry.dirx < 0)
+			mlx->posx -= mlx->ry.dirx * (P_SPEED + mlx->sprint);
 	}
 	else
 	{
-		if ((mlx->posX < (mlx->ry.mapHeight - 1.1)) || mlx->ry.dirX > 0)
-			mlx->posX -= mlx->ry.dirX * (P_SPEED + mlx->sprint);
+		if ((mlx->posx < (mlx->ry.mapheight - 1.1)) || mlx->ry.dirx > 0)
+			mlx->posx -= mlx->ry.dirx * (P_SPEED + mlx->sprint);
 	}
-	if (mlx->posY < (mlx->ry.mapWidth / (double)2))
+	if (mlx->posy < (mlx->ry.mapwidth / (double)2))
 	{
-		if (mlx->posY > 1.1 || mlx->ry.dirY < 0)
-			mlx->posY -= mlx->ry.dirY * (P_SPEED + mlx->sprint);
+		if (mlx->posy > 1.1 || mlx->ry.diry < 0)
+			mlx->posy -= mlx->ry.diry * (P_SPEED + mlx->sprint);
 	}
 	else
 	{
-		if ((mlx->posY < (mlx->ry.mapWidth - 1.1)) || mlx->ry.dirY > 0)
-			mlx->posY -= mlx->ry.dirY * (P_SPEED + mlx->sprint);
+		if ((mlx->posy < (mlx->ry.mapwidth - 1.1)) || mlx->ry.diry > 0)
+			mlx->posy -= mlx->ry.diry * (P_SPEED + mlx->sprint);
 	}
 }
 

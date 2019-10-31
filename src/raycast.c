@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 16:37:23 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/24 19:31:48 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/31 17:24:08 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,104 +26,104 @@ void	set_color(int i, t_map *map)
 		map->color = RGB_YELLOW;
 }
 
+void	raycast_hit_loop(t_mlx *mlx)
+{
+	while (mlx->rl.hit == 0)
+	{
+		if (mlx->rl.sidedistx < mlx->rl.sidedisty)
+		{
+			mlx->rl.sidedistx += mlx->rl.deltadistx;
+			mlx->rl.mapx += mlx->ry.stepx;
+			mlx->rl.side = 0;
+		}
+		else
+		{
+			mlx->rl.sidedisty += mlx->rl.deltadisty;
+			mlx->rl.mapy += mlx->ry.stepy;
+			mlx->rl.side = 1;
+		}
+		if (mlx->ry.worldmap[mlx->rl.mapx][mlx->rl.mapy] == 1)
+			mlx->rl.hit = 1;
+	}
+	if (mlx->rl.side == 0)
+		mlx->rl.perpwalldist = (mlx->rl.mapx - mlx->ry.posx
+			+ (1 - mlx->ry.stepx) / 2) / mlx->rl.raydirx;
+	else
+		mlx->rl.perpwalldist = (mlx->rl.mapy - mlx->ry.posy
+			+ (1 - mlx->ry.stepy) / 2) / mlx->rl.raydiry;
+}
+
+void	sub_raycast_loop(t_mlx *mlx)
+{
+	mlx->rl.camerax = 2 * mlx->rl.x / (double)(WIN_WIDTH) - 1;
+	mlx->rl.raydirx = mlx->ry.dirx + mlx->ry.planex * mlx->rl.camerax;
+	mlx->rl.raydiry = mlx->ry.diry + mlx->ry.planey * mlx->rl.camerax;
+	mlx->rl.mapx = (int)(mlx->ry.posx);
+	mlx->rl.mapy = (int)(mlx->ry.posy);
+	mlx->rl.deltadistx = fabs(1 / mlx->rl.raydirx);
+	mlx->rl.deltadisty = fabs(1 / mlx->rl.raydiry);
+	mlx->rl.hit = 0;
+	if (mlx->rl.raydirx < 0)
+	{
+		mlx->ry.stepx = -1;
+		mlx->rl.sidedistx = (mlx->ry.posx - mlx->rl.mapx)
+			* mlx->rl.deltadistx;
+	}
+	else
+	{
+		mlx->ry.stepx = 1;
+		mlx->rl.sidedistx = (mlx->rl.mapx + 1.0 - mlx->ry.posx)
+			* mlx->rl.deltadistx;
+	}
+	if (mlx->rl.raydiry < 0)
+	{
+		mlx->ry.stepy = -1;
+		mlx->rl.sidedisty = (mlx->ry.posy - mlx->rl.mapy)
+			* mlx->rl.deltadisty;
+	}
+	else
+	{
+		mlx->ry.stepy = 1;
+		mlx->rl.sidedisty = (mlx->rl.mapy + 1.0 - mlx->ry.posy)
+			* mlx->rl.deltadisty;
+	}
+}
+
 void	raycast_loop(t_mlx *mlx)
 {
-	int		x;
-	double	sideDistX;
-	double	sideDistY;
-
-	double	perpWallDist;
-
-	int		hit;
-
-	x = -1;
-	while (++x < WIN_WIDTH)
+	mlx->rl.x = -1;
+	while (++mlx->rl.x < WIN_WIDTH)
 	{
-		double	cameraX = 2 * x / (double)(WIN_WIDTH) - 1; //check this out
-		double	rayDirX = mlx->ry.dirX + mlx->ry.planeX * cameraX;
-		double	rayDirY = mlx->ry.dirY + mlx->ry.planeY * cameraX;
-		int		mapX = (int)(mlx->ry.posX);
-		int		mapY = (int)(mlx->ry.posY);
-		double	deltaDistX = fabs(1 / rayDirX);
-		double	deltaDistY = fabs(1 / rayDirY);
-
-		int		side;
-
-		hit = 0;
-		if (rayDirX < 0)
-		{
-			mlx->ry.stepX = -1;
-			sideDistX = (mlx->ry.posX - mapX) * deltaDistX;
-		}
-		else
-		{
-			mlx->ry.stepX = 1;
-			sideDistX = (mapX + 1.0 - mlx->ry.posX) * deltaDistX;
-		}
-		if (rayDirY < 0)
-		{
-			mlx->ry.stepY = -1;
-			sideDistY = (mlx->ry.posY - mapY) * deltaDistY;
-		}
-		else
-		{
-			mlx->ry.stepY = 1;
-			sideDistY = (mapY + 1.0 - mlx->ry.posY) * deltaDistY;
-		}
-		while (hit == 0)
-		{
-			if (sideDistX < sideDistY)
-			{
-				sideDistX += deltaDistX;
-				mapX += mlx->ry.stepX;
-				side = 0;
-			}
-			else
-			{
-				sideDistY += deltaDistY;
-				mapY += mlx->ry.stepY;
-				side = 1;
-			}
-			if (mlx->ry.worldMap[mapX][mapY] == 1)
-				hit = 1;
-		}
-		if (side == 0)
-			perpWallDist = (mapX - mlx->ry.posX + (1 - mlx->ry.stepX) / 2) / rayDirX;
-		else
-			perpWallDist = (mapY - mlx->ry.posY + (1 - mlx->ry.stepY) / 2) / rayDirY;
-		int lineHeight = (int)(WIN_HEIGHT / perpWallDist);
-
-		int	drawStart = (-lineHeight / 2) + (WIN_HEIGHT / 2);
-		if (drawStart < 0)
-			drawStart = 0;
-		int drawEnd = (lineHeight / 2) + (WIN_HEIGHT / 2);
-		if (drawEnd >= WIN_HEIGHT)
-			drawEnd = WIN_HEIGHT - 1;
-		//set_color(mlx->ry.worldMap[mapX][mapY], &mlx->map);
-		if (side == 1)
+		sub_raycast_loop(mlx);
+		raycast_hit_loop(mlx);
+		mlx->rl.lineheight = (int)(WIN_HEIGHT / mlx->rl.perpwalldist);
+		mlx->rl.drawstart = (-mlx->rl.lineheight / 2) + (WIN_HEIGHT / 2);
+		if (mlx->rl.drawstart < 0)
+			mlx->rl.drawstart = 0;
+		mlx->rl.drawend = (mlx->rl.lineheight / 2) + (WIN_HEIGHT / 2);
+		if (mlx->rl.drawend >= WIN_HEIGHT)
+			mlx->rl.drawend = WIN_HEIGHT - 1;
+		if (mlx->rl.side == 1)
 			mlx->map.color /= 2;
-		double wallX;//where exacly wall was hit
-
-		if (side == 0)
-			wallX = mlx->ry.posY + perpWallDist * rayDirY;
+		if (mlx->rl.side == 0)
+			mlx->rl.wallx = mlx->ry.posy + mlx->rl.perpwalldist
+				* mlx->rl.raydiry;
 		else
-			wallX = mlx->ry.posX + perpWallDist * rayDirX;
-		wallX -= floor(wallX);
-		//xcordinate on the texture
-		int texX;
-
-		texX = (int)(wallX * (double)TEXWIDTH);
-		if (side == 0 && rayDirX > 0)
-			texX = TEXWIDTH - texX - 1;
-		if (side == 1 && rayDirY < 0)
-			texX = TEXWIDTH - texX - 1;
-		mlx->ry.lineHeight = lineHeight;
-		mlx->ry.texX = texX;
-		mlx->ry.x = x;
-		mlx->ry.side = side;
-		mlx->ry.wallX = wallX;
-		mlx->ry.wallh = lineHeight;
-		put_line(x, drawStart, drawEnd, mlx);
+			mlx->rl.wallx = mlx->ry.posx + mlx->rl.perpwalldist
+				* mlx->rl.raydirx;
+		mlx->rl.wallx -= floor(mlx->rl.wallx);
+		mlx->rl.texx = (int)(mlx->rl.wallx * (double)TEXWIDTH);
+		if (mlx->rl.side == 0 && mlx->rl.raydirx > 0)
+			mlx->rl.texx = TEXWIDTH - mlx->rl.texx - 1;
+		if (mlx->rl.side == 1 && mlx->rl.raydiry < 0)
+			mlx->rl.texx = TEXWIDTH - mlx->rl.texx - 1;
+		mlx->ry.lineheight = mlx->rl.lineheight;
+		mlx->ry.texx = mlx->rl.texx;
+		mlx->ry.x = mlx->rl.x;
+		mlx->ry.side = mlx->rl.side;
+		mlx->ry.wallx = mlx->rl.wallx;
+		mlx->ry.wallh = mlx->rl.lineheight;
+		put_line(mlx->rl.x, mlx->rl.drawstart, mlx->rl.drawend, mlx);
 	}
 }
 
@@ -138,11 +138,11 @@ void	raycast(t_mlx *mlx)
 	y = 0;
 	xp = 0;
 	yp = 0.66;
-	mlx->ry.posX = mlx->posX;
-	mlx->ry.posY = mlx->posY;
-	mlx->ry.dirX = (x * cos(mlx->rot)) - (y * sin(mlx->rot));
-	mlx->ry.dirY = (x * sin(mlx->rot)) + (y * cos(mlx->rot));
-	mlx->ry.planeX = (xp * cos(mlx->rot)) - (yp * sin(mlx->rot));
-	mlx->ry.planeY = (xp * sin(mlx->rot)) + (yp * cos(mlx->rot));
+	mlx->ry.posx = mlx->posx;
+	mlx->ry.posy = mlx->posy;
+	mlx->ry.dirx = (x * cos(mlx->rot)) - (y * sin(mlx->rot));
+	mlx->ry.diry = (x * sin(mlx->rot)) + (y * cos(mlx->rot));
+	mlx->ry.planex = (xp * cos(mlx->rot)) - (yp * sin(mlx->rot));
+	mlx->ry.planey = (xp * sin(mlx->rot)) + (yp * cos(mlx->rot));
 	raycast_loop(mlx);
 }

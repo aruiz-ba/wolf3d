@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:47:53 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/24 19:07:15 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/31 15:05:32 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	if_error(t_mlx *mlx, t_list *map)
 {
 	int	er;
 
-	if ((mlx->ry.worldMap = set_board(map, mlx)) == NULL)
+	if ((mlx->ry.worldmap = set_board(map, mlx)) == NULL)
 		error(0);
 	if (test_board(mlx) == 0)
 		error(1);

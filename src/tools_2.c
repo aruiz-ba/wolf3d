@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:52:36 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/24 18:38:25 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/31 16:26:58 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ int		get_player_pos(t_mlx *mlx)
 	int	y;
 
 	y = 0;
-	while (y < mlx->ry.mapHeight)
+	while (y < mlx->ry.mapheight)
 	{
 		x = 0;
-		while (x < mlx->ry.mapWidth)
+		while (x < mlx->ry.mapwidth)
 		{
-			if (mlx->ry.worldMap[y][x] == 2)
+			if (mlx->ry.worldmap[y][x] == 2)
 			{
-				mlx->posX = y;
-				mlx->posY = x;
+				mlx->posx = y;
+				mlx->posy = x;
 				return (1);
 			}
 			x++;

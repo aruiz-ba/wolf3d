@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <aruiz-ba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 19:19:37 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/24 19:34:46 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/31 17:54:17 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,23 +89,23 @@ typedef struct		s_intrim
 
 typedef struct		s_rycst
 {
-	double			posX;
-	double			posY;
-	double			dirX;
-	double			dirY;
-	double			planeX;
-	double			planeY;
-	int				**worldMap;
-	int				mapHeight;
-	int				mapWidth;
-	int				lineHeight;
-	int				texX;
+	double			posx;
+	double			posy;
+	double			dirx;
+	double			diry;
+	double			planex;
+	double			planey;
+	int				**worldmap;
+	int				mapheight;
+	int				mapwidth;
+	int				lineheight;
+	int				texx;
 	int				x;
 	int				side;
-	double			wallX;
+	double			wallx;
 	int				wallh;
-	int				stepX;
-	int				stepY;
+	int				stepx;
+	int				stepy;
 }					t_rycst;
 
 typedef struct		s_map2
@@ -117,6 +117,28 @@ typedef struct		s_map2
 	double			b1;
 }					t_map2;
 
+typedef struct		s_rycst_loop
+{
+	int				x;
+	int				hit;
+	int				mapx;
+	int				mapy;
+	int				side;
+	int				lineheight;
+	int				drawstart;
+	int				drawend;
+	int				texx;
+	double			sidedistx;
+	double			sidedisty;
+	double			perpwalldist;
+	double			camerax;
+	double			raydirx;
+	double			raydiry;
+	double			deltadistx;
+	double			deltadisty;
+	double			wallx;
+}					t_rycst_loop;
+
 typedef struct		s_mlx
 {
 	void			*mlx;
@@ -127,19 +149,21 @@ typedef struct		s_mlx
 	int				y;
 	int				min_k;
 	double			rot;
-	double			posX;
-	double			posY;
+	double			posx;
+	double			posy;
 	double			sprint;
 	t_image			img;
 	t_image			tex[4];
 	t_map			map;
 	t_rycst			ry;
+	t_rycst_loop	rl;
 	int				move_up;
 	int				move_down;
 	int				move_right;
 	int				move_left;
 	int				move_sprint;
 }					t_mlx;
+
 int					deal_key(int key, t_mlx *mlx);
 int					setall(t_mlx *mlx);
 void				new_image(t_mlx *mlx);

@@ -6,7 +6,7 @@
 /*   By: aruiz-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:21:11 by aruiz-ba          #+#    #+#             */
-/*   Updated: 2019/10/22 18:26:41 by aruiz-ba         ###   ########.fr       */
+/*   Updated: 2019/10/31 15:19:16 by aruiz-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		*intrim(char const *s, t_mlx *mlx)
 	in.digitn = digitnum(s);
 	if (!(in.array = malloc(sizeof(int) * (in.digitn))))
 		return (NULL);
-	mlx->ry.mapWidth = in.digitn;
+	mlx->ry.mapwidth = in.digitn;
 	while (s[in.i])
 	{
 		if (sub_intrim(&in, s) == -1)
@@ -92,7 +92,7 @@ int		**set_board(t_list *ls, t_mlx *mlx)
 	height = linked_list_len(ls);
 	if ((out = malloc(sizeof(int*) * height)) == NULL)
 		exit(0);
-	mlx->ry.mapHeight = height;
+	mlx->ry.mapheight = height;
 	if (write_board(out, ls, mlx) == 0)
 		return (NULL);
 	return (out);
